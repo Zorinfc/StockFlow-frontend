@@ -1,0 +1,30 @@
+$edit-color: #E9C874;
+$delete-color: #A34343;
+.title-box {
+    padding: 3rem 1.5rem 2rem;
+    text-align: center;
+}
+
+.btn-nueva {
+  margin: 2px 0 14px 0;
+}
+
+.icon:hover{
+  cursor: pointer;
+}
+.edit{
+  color: rgba($edit-color,1.0);
+
+  &:hover{
+    color: rgba($edit-color, 0.7);
+    transform: scale(1.2);
+  }
+  
+}
+.delete{
+  color: rgba($delete-color,1.0);
+  &:hover{
+    color: rgba($delete-color, 0.7);
+    transform: scale(1.2);
+  }
+}

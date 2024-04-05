@@ -1,0 +1,28 @@
+<div class="d-flex align-items-center bg-dark">
+  <div class="container-fluid center">
+    <form [formGroup]="loginForm">
+      <div class="ring my-5">
+        <i style="--clr: #00ff0a"></i>
+        <i style="--clr: #ff0057"></i>
+        <i style="--clr: #fffd44"></i>
+        <div class="login">
+          <h2>Login</h2>
+
+          <div class="inputBx">
+            <input type="text" placeholder="Username" formControlName="email" />
+          </div>
+          <div class="inputBx">
+            <input
+              type="password"
+              placeholder="Password"
+              formControlName="password"
+            />
+          </div>
+          <div class="inputBx">
+            <input type="button" value="Login" (click)="login()" />
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

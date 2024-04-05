@@ -1,0 +1,57 @@
+<div
+  class="container d-flex flex-column justify-content-center align-items-center"
+>
+  <div class="title-box">
+    <h1>SHELF MANAGEMENT</h1>
+  </div>
+
+  <a class="btn btn-primary btn-nueva"><b>+</b> Add Shelf </a>
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Capacity</th>
+        <th>Item Quantity</th>
+        <th>Item Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (shelf of shelves; track $index) { @if (shelf.itemName != null) {
+      <tr>
+        <td>{{ shelf.no }}</td>
+        <td>{{ shelf.capacity }}</td>
+        <td>{{ shelf.quantity }}</td>
+        <td>{{ shelf.itemName }}</td>
+        <td>
+          <div class="d-flex justify-content-center">
+            <span class="icon edit material-symbols-outlined me-3">edit</span>
+            <span
+              class="icon delete material-symbols-outlined"
+              (click)="deleteShelf(shelf.no)"
+              >delete</span
+            >
+          </div>
+        </td>
+      </tr>
+      }@else {
+      <tr>
+        <td>{{ shelf.no }}</td>
+        <td>{{ shelf.capacity }}</td>
+        <td>{{ shelf.quantity }}</td>
+        <td>Empty</td>
+        <td>
+          <div class="d-flex justify-content-center">
+            <span class="icon edit material-symbols-outlined me-3">edit</span>
+            <span
+              class="icon delete material-symbols-outlined"
+              (click)="deleteShelf(shelf.no)"
+              >delete</span
+            >
+          </div>
+        </td>
+      </tr>
+      } }
+    </tbody>
+  </table>
+</div>
