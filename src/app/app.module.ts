@@ -12,13 +12,12 @@ import {
   provideHttpClient,
   withInterceptors,
 } from '@angular/common/http';
-import { APP_CONFIG } from './app.config';
-import { environment } from '../environments/environment';
 import { MenuComponent } from './core/component/menu/menu.component';
 import { ErrorComponent } from './core/component/error/error.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [AppComponent, LoginComponent, MenuComponent, ErrorComponent],
   imports: [
@@ -31,6 +30,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     HttpClientModule,
     MatIconModule,
     MatDialogModule,
+    SharedModule,
   ],
   providers: [provideAnimationsAsync(), provideAnimationsAsync()],
   bootstrap: [AppComponent],

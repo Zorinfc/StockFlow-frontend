@@ -5,7 +5,8 @@
     <h1>SHELF MANAGEMENT</h1>
   </div>
 
-  <a class="btn btn-primary btn-nueva"><b>+</b> Add Shelf </a>
+  <!-- <a class="btn btn-primary btn-nueva"><b>+</b> Add Shelf </a> -->
+  <button class="btn btn-primary" (click)="addShelf()">Add Shelf +</button>
   <table class="table table-bordered table-hover">
     <thead>
       <tr>
@@ -25,7 +26,11 @@
         <td>{{ shelf.itemName }}</td>
         <td>
           <div class="d-flex justify-content-center">
-            <span class="icon edit material-symbols-outlined me-3">edit</span>
+            <span
+              class="icon edit material-symbols-outlined me-3"
+              (click)="edit()"
+              >edit</span
+            >
             <span
               class="icon delete material-symbols-outlined"
               (click)="deleteShelf(shelf.no)"
@@ -42,10 +47,14 @@
         <td>Empty</td>
         <td>
           <div class="d-flex justify-content-center">
-            <span class="icon edit material-symbols-outlined me-3">edit</span>
+            <span
+              class="icon edit material-symbols-outlined me-3"
+              (click)="edit()"
+              >edit</span
+            >
             <span
               class="icon delete material-symbols-outlined"
-              (click)="deleteShelf(shelf.no)"
+              (click)="openDialog(shelf.no)"
               >delete</span
             >
           </div>

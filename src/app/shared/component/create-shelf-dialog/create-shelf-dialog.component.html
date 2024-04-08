@@ -1,0 +1,9 @@
+<div
+  class="mx-4 my-4 d-flex justify-content-start align-items-start flex-column"
+>
+  <label for=""> Shelves to create : </label>
+  <div class="mt-2">
+    <input type="number" max="10" min="1" placeholder="1" [(ngModel)]="count" />
+  </div>
+  <button class="btn btn-info mt-2" (click)="addShelf()">Add shelf</button>
+</div>

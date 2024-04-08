@@ -1,1 +1,50 @@
-<p>item works!</p>
+<div
+  class="container d-flex flex-column justify-content-center align-items-center"
+>
+  <div class="title-box">
+    <h1>ITEM MANAGEMENT</h1>
+  </div>
+
+  <!-- <a class="btn btn-primary btn-nueva"><b>+</b> Add Shelf </a> -->
+  <button class="btn btn-primary" (click)="newItem()">NEW ITEM</button>
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Item Name</th>
+        <th>Minimum Quantity</th>
+        <th>Total</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of items; track $index) {
+      <tr>
+        <td>{{ item.name }}</td>
+        <td>{{ item.min_quantity }}</td>
+        <td>{{ item.total }}</td>
+        <td>
+          <div class="d-flex justify-content-center">
+            <span
+              class="icon plus material-symbols-outlined"
+              (click)="itemAdd(item.name)"
+            >
+              add
+            </span>
+            <span
+              class="icon minus material-symbols-outlined"
+              (click)="itemRemove(item.name)"
+            >
+              remove
+            </span>
+            <span
+              class="icon delete material-symbols-outlined"
+              (click)="delete(item.name)"
+              >delete</span
+            >
+          </div>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

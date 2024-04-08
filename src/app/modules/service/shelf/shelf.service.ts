@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Shelf } from '../../shelf/shelf';
+import { Shelf } from '../../shelf/dto/shelf';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +14,21 @@ export class ShelfService {
   }
 
   deleteItem(no: number): Observable<any> {
-    return this.httpClient.post('http://localhost:8080/shelf/delete', { no });
+    return this.httpClient.post('http://localhost:8080/shelf/delete', {
+      no,
+    });
   }
+
+  addShelf(count: number): Observable<any> {
+    return this.httpClient.post('http://localhost:8080/shelf/add', {
+      count,
+    });
+  }
+
+  // deleteItem(no: number): Observable<boolean> {
+  //   return this.httpClient.post<boolean>(
+  //     'http://localhost:8080/shelf/delete',
+  //     no
+  //   );
+  // }
 }
