@@ -18,6 +18,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SharedModule } from './shared/shared.module';
+import { UserComponent } from './modules/user/user/user.component';
 @NgModule({
   declarations: [AppComponent, LoginComponent, MenuComponent, ErrorComponent],
   imports: [

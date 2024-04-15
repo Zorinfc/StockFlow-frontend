@@ -10,17 +10,17 @@ export class ShelfService {
   constructor(private httpClient: HttpClient) {}
 
   getShelves(): Observable<Shelf[]> {
-    return this.httpClient.get<Shelf[]>('http://localhost:8080/shelf');
+    return this.httpClient.get<Shelf[]>('http://localhost:8080/api/v1/shelf');
   }
 
   deleteItem(no: number): Observable<any> {
-    return this.httpClient.post('http://localhost:8080/shelf/delete', {
+    return this.httpClient.post('http://localhost:8080/api/v1/shelf/delete', {
       no,
     });
   }
 
   addShelf(count: number): Observable<any> {
-    return this.httpClient.post('http://localhost:8080/shelf/add', {
+    return this.httpClient.post('http://localhost:8080/api/v1/shelf/add', {
       count,
     });
   }

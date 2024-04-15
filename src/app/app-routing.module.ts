@@ -21,6 +21,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('./modules/item/item.module').then((m) => m.ItemModule),
       },
+      {
+        path: 'user',
+        loadChildren: () =>
+          import('./modules/user/user.module').then((m) => m.UserModule),
+      },
     ],
   },
   { path: '**', component: ErrorComponent },

@@ -45,19 +45,21 @@ export class ItemComponent implements OnInit {
 
     dialog.afterClosed().subscribe({
       next: (response) => {
-        this.itemCreate.name = response.name;
-        this.itemCreate.quantity = response.quantity;
-        this.itemCreate.min_quantity = response.min_quantity;
-        console.log(this.itemCreate);
-        this.itemService.addItem(this.itemCreate).subscribe({
-          next: (response) => {
-            this.refreshItems();
-            this.toastr.info('item added');
-          },
-          error: (err) => {
-            this.toastr.error('error occured');
-          },
-        });
+        if (response != undefined && response.name != '') {
+          this.itemCreate.name = response.name;
+          this.itemCreate.quantity = response.quantity;
+          this.itemCreate.min_quantity = response.min_quantity;
+          console.log(this.itemCreate);
+          this.itemService.addItem(this.itemCreate).subscribe({
+            next: (response) => {
+              this.refreshItems();
+              this.toastr.info('item added');
+            },
+            error: (err) => {
+              this.toastr.error('error occured');
+            },
+          });
+        }
       },
     });
   }
@@ -71,15 +73,19 @@ export class ItemComponent implements OnInit {
 
     dialog.afterClosed().subscribe({
       next: (response) => {
-        this.itemService.deleteItem(name).subscribe({
-          next: (response) => {
-            this.refreshItems();
-            this.toastr.info('item deleted');
-          },
-          error: (err) => {
-            this.toastr.error('error occured');
-          },
-        });
+        if (response?.result == true) {
+          this.itemService.deleteItem(name).subscribe({
+            next: (response) => {
+              this.refreshItems();
+              if (response == true) {
+                this.toastr.info('item deleted');
+              }
+            },
+            error: (err) => {
+              this.toastr.error('error occured');
+            },
+          });
+        }
       },
     });
   }
@@ -91,22 +97,24 @@ export class ItemComponent implements OnInit {
       exitAnimationDuration: '250ms',
     });
     dialog.componentInstance.question = 'How many do you want to add :';
-
+    dialog.componentInstance.buttonName = 'Add Item';
     dialog.afterClosed().subscribe({
       next: (response) => {
-        this.itemInOut.name = name;
-        this.itemInOut.operator = true;
-        this.itemInOut.count = response;
-        console.log('itemComponent - itemAdd() ==> ' + this.itemInOut.count);
-        this.itemService.inOutItem(this.itemInOut).subscribe({
-          next: (response) => {
-            this.refreshItems();
-            this.toastr.info('Item Added');
-          },
-          error: (err) => {
-            this.toastr.error('error occured');
-          },
-        });
+        if (response != undefined && response != 0) {
+          this.itemInOut.name = name;
+          this.itemInOut.operator = true;
+          this.itemInOut.count = response;
+          console.log(response);
+          this.itemService.inOutItem(this.itemInOut).subscribe({
+            next: (response) => {
+              this.refreshItems();
+              this.toastr.info('Item Added');
+            },
+            error: (err) => {
+              this.toastr.error('error occured');
+            },
+          });
+        }
       },
       error: (err) => {
         this.toastr.error('error occured');
@@ -121,21 +129,24 @@ export class ItemComponent implements OnInit {
       exitAnimationDuration: '250ms',
     });
     dialog.componentInstance.question = 'How many do you want to remove :';
+    dialog.componentInstance.buttonName = 'Remove Item';
     dialog.afterClosed().subscribe({
       next: (response) => {
-        this.itemInOut.name = name;
-        this.itemInOut.operator = false;
-        this.itemInOut.count = response;
-        // console.log('itemComponent - itemAdd() ==> ' + this.itemInOut.operator);
-        this.itemService.inOutItem(this.itemInOut).subscribe({
-          next: () => {
-            this.refreshItems();
-            this.toastr.info('Item Exported');
-          },
-          error: (err) => {
-            this.toastr.error('error occured');
-          },
-        });
+        if (response != undefined && response != 0) {
+          this.itemInOut.name = name;
+          this.itemInOut.operator = false;
+          this.itemInOut.count = response;
+          // console.log('itemComponent - itemAdd() ==> ' + this.itemInOut.operator);
+          this.itemService.inOutItem(this.itemInOut).subscribe({
+            next: () => {
+              this.refreshItems();
+              this.toastr.info('Item Exported');
+            },
+            error: (err) => {
+              this.toastr.error('error occured');
+            },
+          });
+        }
       },
       error: (err) => {
         this.toastr.error('error occured');

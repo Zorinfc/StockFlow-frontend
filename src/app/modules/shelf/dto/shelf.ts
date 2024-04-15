@@ -5,6 +5,6 @@ export class Shelf {
     public no: number,
     public capacity: number,
     public quantity: number,
-    public itemName: String
+    public itemName: string
   ) {}
 }

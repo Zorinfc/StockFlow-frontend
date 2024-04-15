@@ -12,17 +12,22 @@ export class ItemService {
   constructor(private httpClient: HttpClient) {}
 
   getItems(): Observable<Item[]> {
-    return this.httpClient.get<Item[]>('http://localhost:8080/item');
+    return this.httpClient.get<Item[]>('http://localhost:8080/api/v1/item');
   }
 
   addItem(item: ItemCreate): Observable<any> {
-    return this.httpClient.post('http://localhost:8080/item/add', item);
+    return this.httpClient.post('http://localhost:8080/api/v1/item/add', item);
   }
 
   deleteItem(name: string): Observable<any> {
-    return this.httpClient.post('http://localhost:8080/item/delete', { name });
+    return this.httpClient.post('http://localhost:8080/api/v1/item/delete', {
+      name,
+    });
   }
   inOutItem(itemInOut: ItemInOut): Observable<any> {
-    return this.httpClient.post('http://localhost:8080/item/opt', itemInOut);
+    return this.httpClient.post(
+      'http://localhost:8080/api/v1/item/opt',
+      itemInOut
+    );
   }
 }
