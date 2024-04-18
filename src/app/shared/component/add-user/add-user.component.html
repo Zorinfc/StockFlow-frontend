@@ -1,0 +1,38 @@
+<div
+  class="d-flex justify-content-center align-items-center flex-column mx-4 my-4"
+>
+  <form [formGroup]="userForm">
+    <label for="name">Name : </label>
+    <input
+      class="mt-2"
+      type="text"
+      name="name"
+      formControlName="name"
+      id="name"
+    />
+    <label for="lastName">Lastname : </label>
+    <input
+      class="mt-2"
+      type="text"
+      name="lastName"
+      formControlName="lastName"
+      id="lastName"
+    />
+    <label for="email">Email : </label>
+    <input
+      class="mt-2"
+      type="text"
+      name="email"
+      formControlName="email"
+      id="email"
+    />
+    <label for="role">Role : </label>
+    <select class="custom-select" name="role" formControlName="role" id="role">
+      <option [ngValue]="1">admin</option>
+      <option [ngValue]="2">depo_sorumlusu</option>
+      <option [ngValue]="3">rapor_kullanıcısı</option>
+    </select>
+  </form>
+
+  <button class="btn btn-primary mt-2" (click)="addUser()">Add Employee</button>
+</div>

@@ -6,7 +6,9 @@
   </div>
 
   <!-- <a class="btn btn-primary btn-nueva"><b>+</b> Add Shelf </a> -->
-  <button class="btn btn-primary">Add Employee +</button>
+  <button class="btn btn-primary mb-3" (click)="addEmployee()">
+    Add Employee +
+  </button>
   <table class="table table-bordered table-hover">
     <thead>
       <tr>
@@ -26,8 +28,16 @@
         <td>{{ user.roleName }}</td>
         <td>
           <div class="d-flex justify-content-center">
-            <span class="icon edit material-symbols-outlined me-3">edit</span>
-            <span class="icon delete material-symbols-outlined">delete</span>
+            <span
+              class="icon edit material-symbols-outlined me-3"
+              (click)="updateEmployee(user.email)"
+              >edit</span
+            >
+            <span
+              class="icon delete material-symbols-outlined"
+              (click)="delete(user.email)"
+              >delete</span
+            >
           </div>
         </td>
       </tr>
