@@ -7,5 +7,6 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './menu.component.scss',
 })
 export class MenuComponent {
+  role: string | null = localStorage.getItem('role');
   constructor(public route: ActivatedRoute) {}
 }

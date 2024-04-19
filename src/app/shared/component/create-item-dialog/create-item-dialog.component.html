@@ -1,11 +1,18 @@
 <div
   class="d-flex justify-content-center align-items-center flex-column mx-4 my-4"
 >
-  <label for="">Item Name : </label>
-  <input class="mt-2" type="text" [(ngModel)]="name" />
-  <label for="">Item Quantity : </label>
-  <input class="mt-2" type="number" [(ngModel)]="quantity" />
-  <label for="">Minimum Quantity : </label>
-  <input class="mt-2" type="number" [(ngModel)]="min_quantity" />
+  <label for="name">Item Name : </label>
+  <input class="mt-2" type="text" [(ngModel)]="name" id="name" />
+  <label for="quantity">Item Quantity : </label>
+  <input class="mt-2" type="number" [(ngModel)]="quantity" id="quantity" />
+  <label for="min_quantity">Minimum Quantity : </label>
+  <input
+    class="mt-2"
+    type="number"
+    [(ngModel)]="min_quantity"
+    id="min_quantity"
+    min="0"
+    max="100"
+  />
   <button class="btn btn-primary mt-2" (click)="createItem()">New Item</button>
 </div>

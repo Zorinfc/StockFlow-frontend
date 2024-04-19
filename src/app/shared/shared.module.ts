@@ -10,6 +10,7 @@ import { ItemInOutDialogComponent } from './component/item-in-out-dialog/item-in
 import { AddUserComponent } from './component/add-user/add-user.component';
 import { SuccessDialogComponent } from './component/success-dialog/success-dialog.component';
 import { UpdateUserComponent } from './component/update-user/update-user.component';
+import { EditShelfComponent } from './component/edit-shelf/edit-shelf.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { UpdateUserComponent } from './component/update-user/update-user.compone
     AddUserComponent,
     SuccessDialogComponent,
     UpdateUserComponent,
+    EditShelfComponent,
   ],
   imports: [
     CommonModule,

@@ -8,67 +8,75 @@ import { Observable, map } from 'rxjs';
 export class LoginService {
   constructor(private httpClient: HttpClient) {}
 
-  // loggedIn = false;
-  // token = '';
-  // email = '';
-  // password = '';
-  // kullanicilarId = '';
-  // roller: string = '';
+  loggedIn = false;
+  token = '';
+  email = '';
+  password = '';
+  kullanicilarId = '';
+  role: string = '';
 
-  // login(email: string, password: string): Observable<any> {
-  //   console.log('login service');
+  login(email: string, password: string): Observable<any> {
+    return this.httpClient
+      .post(
+        'http://localhost:8080/api/v1/login',
+        { email, password },
+        { responseType: 'text' }
+      )
+      .pipe(
+        map((data) => {
+          // console.log(
+          //   'email =>' + email + 'password =>' + password + 'data =>' + data
+          // );
+          // console.log(data);
+          this.parseLogin(data, email, password);
+          return data;
+        })
+      );
+  }
+  relogin(): Observable<any> {
+    return this.login(this.email, this.password);
+  }
+  logout() {
+    this.loggedIn = false;
+    this.token = '';
+    this.email = '';
+    this.role = '';
+    localStorage.clear();
+  }
 
-  //   return this.httpClient
-  //     .post<String>('http://localhost:8080/api/v1/login', { email, password })
-  //     .pipe(
-  //       map((data) => {
-  //         console.log('data =>' + data);
+  parseLogin(data: string, email: string, password: string) {
+    this.loggedIn = true;
+    this.token = data;
+    this.email = email;
+    this.password = password;
+    let payload = this.parseJwt(this.token);
+    this.role = payload.role;
 
-  //         this.parseLogin(data, email, password);
-  //       })
-  //     );
-  // }
-  // relogin(): Observable<any> {
-  //   return this.login(this.email, this.password);
-  // }
-  // logout() {
-  //   this.loggedIn = false;
-  //   this.token = '';
-  //   this.email = '';
-  //   this.password = '';
-  //   this.kullanicilarId = '';
-  //   this.roller = '';
-  //   localStorage.clear();
-  // }
+    localStorage.setItem('token', data);
+    localStorage.setItem('role', this.role);
+  }
 
-  // parseLogin(data: any, email: string, password: string) {
-  //   this.loggedIn = true;
-  //   this.token = data.token;
-  //   this.email = email;
-  //   this.password = password;
-  //   localStorage.setItem('token', data.token);
-  //   localStorage.setItem('email', email);
-  //   localStorage.setItem('password', password);
-  //   // let payload = this.parseJwt(this.token);
-  //   let payload = this.decoder.DecodeToken(this.token);
-  //   console.log('payload ==>' + payload);
-  //   // this.roller = payload.role;
-  //   return data;
-  // }
+  whatRole() {
+    let payload = this.parseJwt(this.token);
+    return payload.role;
+  }
 
-  // parseJwt(token: string) {
-  //   let base64Url = token.split('.')[1];
-  //   let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-  //   let jsonPayload = decodeURIComponent(
-  //     window
-  //       .atob(base64)
-  //       .split('')
-  //       .map(function (c) {
-  //         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-  //       })
-  //       .join('')
-  //   );
+  parseJwt(token: string) {
+    let base64Url = token.split('.')[1];
+    let base64 = base64Url
+      .replace(/-/g, '+')
+      .replace(/_/g, '/')
+      .replace(/_/g, '');
+    let jsonPayload = decodeURIComponent(
+      window
+        .atob(base64)
+        .split('')
+        .map(function (c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join('')
+    );
 
-  //   return JSON.parse(jsonPayload);
-  // }
+    return JSON.parse(jsonPayload);
+  }
 }

@@ -1,0 +1,14 @@
+*{
+    font-weight: 500;
+}
+
+input{
+    margin-bottom:1rem ;
+    border:1px solid #0d6efd;
+    &:focus{
+        outline: none !important;
+        box-shadow: 0 0 10px #719ECE
+    }
+    border-radius: 12px;
+    padding: 0.4rem;
+}

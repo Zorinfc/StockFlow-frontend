@@ -18,11 +18,14 @@
     </thead>
     <tbody>
       @for (item of items; track $index) {
+
       <tr>
         <td>{{ item.name }}</td>
         <td>{{ item.min_quantity }}</td>
         <td>{{ item.total }}</td>
+
         <td>
+          @if(role != 'rapor_kullanicisi'){
           <div class="d-flex justify-content-center">
             <span
               class="icon plus material-symbols-outlined"
@@ -42,6 +45,7 @@
               >delete</span
             >
           </div>
+          }
         </td>
       </tr>
       }

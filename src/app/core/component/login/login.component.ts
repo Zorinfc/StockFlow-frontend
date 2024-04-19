@@ -22,31 +22,29 @@ export class LoginComponent {
     password: '',
   });
 
-  login() {
-    let email = this.loginForm.get('email')!.value;
-    let password = this.loginForm.get('password')!.value;
-    localStorage.setItem('email', email);
-    localStorage.setItem('password', password);
-    this.router.navigate(['/menu']);
-  }
+  // login() {
+  //   let email = this.loginForm.get('email')!.value;
+  //   let password = this.loginForm.get('password')!.value;
+  //   localStorage.setItem('email', email);
+  //   localStorage.setItem('password', password);
+  //   this.router.navigate(['/menu']);
+  // }
 
   logOut() {
     localStorage.clear();
   }
 
-  // login() {
-  //   let email = this.loginForm.get('email')!.value;
-  //   let password = this.loginForm.get('password')!.value;
-
-  //   this.loginService.login(email, password).subscribe({
-  //     next: (data) => {
-  //       console.log(data);
-  //       this.toastr.success('giris basarili');
-  //     },
-  //     error: (err) => {
-  //       //console.log(err);
-  //       this.toastr.error('basarisiz');
-  //     },
-  //   });
-  // }
+  login() {
+    let email = this.loginForm.get('email')!.value;
+    let password = this.loginForm.get('password')!.value;
+    this.loginService.login(email, password).subscribe({
+      next: (data) => {
+        this.router.navigate(['menu/home']);
+        this.toastr.success('giris basarili');
+      },
+      error: (err) => {
+        this.toastr.error('basarisiz');
+      },
+    });
+  }
 }

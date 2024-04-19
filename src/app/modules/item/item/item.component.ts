@@ -18,6 +18,8 @@ export class ItemComponent implements OnInit {
   items: Item[] = [];
   itemCreate: ItemCreate = { name: '', quantity: 0, min_quantity: 0 };
   itemInOut: ItemInOut = { name: '', count: 0, operator: false };
+  role: string | null = localStorage.getItem('role');
+
   constructor(
     private itemService: ItemService,
     private toastr: ToastrService,
@@ -56,7 +58,7 @@ export class ItemComponent implements OnInit {
               this.toastr.info('item added');
             },
             error: (err) => {
-              this.toastr.error('error occured');
+              this.toastr.error('There is not any empty shelf');
             },
           });
         }

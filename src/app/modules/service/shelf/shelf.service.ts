@@ -25,10 +25,10 @@ export class ShelfService {
     });
   }
 
-  // deleteItem(no: number): Observable<boolean> {
-  //   return this.httpClient.post<boolean>(
-  //     'http://localhost:8080/shelf/delete',
-  //     no
-  //   );
-  // }
+  editShelf(no: number, quantity: number): Observable<any> {
+    return this.httpClient.post('http://localhost:8080/api/v1/shelf/edit', {
+      no,
+      quantity,
+    });
+  }
 }

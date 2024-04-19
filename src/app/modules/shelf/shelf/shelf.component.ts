@@ -5,7 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../../../shared/component/delete-dialog/delete-dialog.component';
 import { CreateShelfDialogComponent } from '../../../shared/component/create-shelf-dialog/create-shelf-dialog.component';
-import { HttpResponseBase } from '@angular/common/http';
+import { EditShelfComponent } from '../../../shared/component/edit-shelf/edit-shelf.component';
+import { LoginService } from '../../../core/service/login/login.service';
 
 @Component({
   selector: 'app-shelf',
@@ -14,6 +15,8 @@ import { HttpResponseBase } from '@angular/common/http';
 })
 export class ShelfComponent implements OnInit {
   shelves: Shelf[] = [];
+  role: string | null = localStorage.getItem('role');
+
   constructor(
     private shelfService: ShelfService,
     private toastr: ToastrService,
@@ -31,27 +34,29 @@ export class ShelfComponent implements OnInit {
       },
     });
   }
-
-  deleteShelf(no: number) {
-    this.shelfService.deleteItem(no).subscribe({
-      next: (data) => {
-        this.refreshShelves();
-        // console.log('data==>' + data);
-        if (data == true) {
-          this.toastr.info('Shelf deleted');
-        } else {
-          this.toastr.error('Shelf has an item');
+  edit(no: number) {
+    let dialog = this.dialog.open(EditShelfComponent, {
+      width: '250px',
+      enterAnimationDuration: '250ms',
+      exitAnimationDuration: '250ms',
+    });
+    dialog.afterClosed().subscribe({
+      next: (response) => {
+        if (response != 0) {
+          this.shelfService.editShelf(no, response).subscribe({
+            next: (resp) => {
+              if (resp.result != 0) {
+                // this.toastr.info(resp);
+                this.refreshShelves();
+              }
+            },
+          });
         }
-      },
-      error: (err) => {
-        this.toastr.error('error');
       },
     });
   }
 
-  edit() {}
-
-  openDialog(no: number): void {
+  deleteShelf(no: number): void {
     let dialog = this.dialog.open(DeleteDialogComponent, {
       width: '250px',
       enterAnimationDuration: '250ms',
@@ -61,7 +66,20 @@ export class ShelfComponent implements OnInit {
     dialog.afterClosed().subscribe({
       next: (response) => {
         if (response?.result == true) {
-          this.deleteShelf(no);
+          this.shelfService.deleteItem(no).subscribe({
+            next: (data) => {
+              this.refreshShelves();
+              // console.log('data==>' + data);
+              if (data == true) {
+                this.toastr.info('Shelf deleted');
+              } else {
+                this.toastr.error('Shelf has an item');
+              }
+            },
+            error: (err) => {
+              this.toastr.error('error');
+            },
+          });
         }
       },
     });

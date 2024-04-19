@@ -12,6 +12,11 @@ const routes: Routes = [
     component: MenuComponent,
     children: [
       {
+        path: 'home',
+        loadChildren: () =>
+          import('./modules/home/home.module').then((m) => m.HomeModule),
+      },
+      {
         path: 'shelf',
         loadChildren: () =>
           import('./modules/shelf/shelf.module').then((m) => m.ShelfModule),

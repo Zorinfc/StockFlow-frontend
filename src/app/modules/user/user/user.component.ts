@@ -124,31 +124,33 @@ export class UserComponent implements OnInit {
         });
         dialog.afterClosed().subscribe({
           next: (response) => {
-            console.log(response.object.value.boolean);
-            // password reset isteniyorsa
-            if (response.object.value.boolean) {
-              this.dto.name = response.object.value.name;
-              this.dto.lastName = response.object.value.lastName;
-              this.dto.email = response.object.value.email;
-              this.dto.password = this.passwordGenerator();
-              this.dto.roleId = response.object.value.role;
-              this.userService.updateUser(this.dto).subscribe({
-                next: (resp) => {
-                  this.refreshTable();
-                },
-              });
-            }
-            //password reset istenmiyorsa
-            else {
-              this.dto.name = response.object.value.name;
-              this.dto.lastName = response.object.value.lastName;
-              this.dto.email = response.object.value.email;
-              this.dto.roleId = response.object.value.role;
-              this.userService.updateUser(this.dto).subscribe({
-                next: (resp) => {
-                  this.refreshTable();
-                },
-              });
+            if (response?.object != undefined) {
+              //password reset isteniyorsa
+              if (response?.object.value.boolean) {
+                this.dto.name = response.object.value.name;
+                this.dto.lastName = response.object.value.lastName;
+                this.dto.email = response.object.value.email;
+                this.dto.password = this.passwordGenerator();
+                this.passwordDialog(this.dto.password);
+                this.dto.roleId = response.object.value.role;
+                this.userService.updateUser(this.dto).subscribe({
+                  next: (resp) => {
+                    this.refreshTable();
+                  },
+                });
+              }
+              //password reset istenmiyorsa
+              else {
+                this.dto.name = response.object.value.name;
+                this.dto.lastName = response.object.value.lastName;
+                this.dto.email = response.object.value.email;
+                this.dto.roleId = response.object.value.role;
+                this.userService.updateUser(this.dto).subscribe({
+                  next: (resp) => {
+                    this.refreshTable();
+                  },
+                });
+              }
             }
           },
         });

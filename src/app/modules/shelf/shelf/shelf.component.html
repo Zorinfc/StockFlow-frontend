@@ -25,18 +25,21 @@
         <td>{{ shelf.quantity }}</td>
         <td>{{ shelf.itemName }}</td>
         <td>
+          @if (role !='rapor_kullanicisi') {
           <div class="d-flex justify-content-center">
             <span
-              class="icon edit material-symbols-outlined me-3"
-              (click)="edit()"
-              >edit</span
+              class="icon edit material-symbols-outlined"
+              (click)="edit(shelf.no)"
             >
+              remove
+            </span>
             <span
               class="icon delete material-symbols-outlined"
-              (click)="openDialog(shelf.no)"
+              (click)="deleteShelf(shelf.no)"
               >delete</span
             >
           </div>
+          }
         </td>
       </tr>
       }@else {
@@ -46,18 +49,20 @@
         <td>{{ shelf.quantity }}</td>
         <td>Empty</td>
         <td>
+          @if (role !='rapor_kullanicisi') {
           <div class="d-flex justify-content-center">
-            <span
-              class="icon edit material-symbols-outlined me-3"
-              (click)="edit()"
-              >edit</span
-            >
+            <!-- <span
+              class="icon edit material-symbols-outlined"
+              (click)="edit(shelf.no)"
+              >remove</span
+            > -->
             <span
               class="icon delete material-symbols-outlined"
-              (click)="openDialog(shelf.no)"
+              (click)="deleteShelf(shelf.no)"
               >delete</span
             >
           </div>
+          }
         </td>
       </tr>
       } }
