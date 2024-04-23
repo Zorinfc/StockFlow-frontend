@@ -18,4 +18,15 @@ export class HomeService {
       id,
     });
   }
+
+  openReport(id: number): Observable<any> {
+    return this.httpClient.post('http://localhost:8080/api/v1/report/open', {
+      id,
+    });
+  }
+  deleteReport(id: number): Observable<any> {
+    return this.httpClient.post('http://localhost:8080/api/v1/report/delete', {
+      id,
+    });
+  }
 }

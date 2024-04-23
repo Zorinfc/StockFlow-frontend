@@ -36,6 +36,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./modules/report/report.module').then((m) => m.ReportModule),
       },
+      {
+        path: 'profile',
+        loadChildren: () =>
+          import('./modules/profile/profile.module').then(
+            (m) => m.ProfileModule
+          ),
+      },
     ],
   },
   { path: '**', component: ErrorComponent },

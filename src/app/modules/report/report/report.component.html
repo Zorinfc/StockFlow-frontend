@@ -11,6 +11,7 @@
         <th>Full Name</th>
         <th>Description</th>
         <th>Item</th>
+        <th>Status</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -21,12 +22,38 @@
         <td>{{ report.userName }} {{ report.userLastName }}</td>
         <td>{{ report.description }}</td>
         <td>{{ report.itemName }}</td>
+        @if (report.active == true) {
+        <td>Active</td>
+        }@else {
+        <td>Inactive</td>
+        }
         <td>
           <div class="d-flex justify-content-center">
-            <span class="icon edit material-symbols-outlined me-3">edit</span>
-            <span class="icon delete material-symbols-outlined">
-              person_remove
+            <div class="form-check form-switch">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                role="switch"
+                id="flexSwitchCheckChecked"
+                [checked]="report.active"
+                (click)="openCloseReport(report.id, report.active)"
+              />
+            </div>
+            @if (report.active == false) {
+            <span
+              class="icon delete disable material-symbols-outlined"
+              (click)="deleteReport(report.id)"
+            >
+              delete
             </span>
+            }@else {
+            <span
+              class="icon delete material-symbols-outlined"
+              (click)="deleteReport(report.id)"
+            >
+              delete
+            </span>
+            }
           </div>
         </td>
       </tr>

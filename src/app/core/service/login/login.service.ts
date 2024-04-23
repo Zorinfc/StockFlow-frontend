@@ -49,6 +49,7 @@ export class LoginService {
     this.role = payload.role;
     //console.log(this.role);
     localStorage.setItem('token', data);
+    localStorage.setItem('role', this.role);
   }
 
   parseJwt(token: string) {

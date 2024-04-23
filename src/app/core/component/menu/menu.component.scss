@@ -21,3 +21,15 @@
       padding-top: 0.5em;
     }
   }
+
+  // dropdown ▼ kaldırma
+  .dropdown-toggle{
+    &:after{
+      content: none;
+    }
+  }
+
+  .dropstart .dropdown-toggle::before{
+    content: none;
+}
+
