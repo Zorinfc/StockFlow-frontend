@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { EmailValidator, FormBuilder } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { LoginService } from '../../service/login/login.service';
 import { Router } from '@angular/router';
@@ -18,21 +18,9 @@ export class LoginComponent {
   ) {}
 
   loginForm = this.builder.nonNullable.group({
-    email: '',
-    password: '',
+    email: 'aaa',
+    password: 'anZuX5Gm',
   });
-
-  // login() {
-  //   let email = this.loginForm.get('email')!.value;
-  //   let password = this.loginForm.get('password')!.value;
-  //   localStorage.setItem('email', email);
-  //   localStorage.setItem('password', password);
-  //   this.router.navigate(['/menu']);
-  // }
-
-  logOut() {
-    localStorage.clear();
-  }
 
   login() {
     let email = this.loginForm.get('email')!.value;
@@ -41,6 +29,7 @@ export class LoginComponent {
       next: (data) => {
         this.router.navigate(['menu/home']);
         this.toastr.success('giris basarili');
+        this.loginService.getRole();
       },
       error: (err) => {
         this.toastr.error('basarisiz');

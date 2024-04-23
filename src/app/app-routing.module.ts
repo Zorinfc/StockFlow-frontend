@@ -31,6 +31,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('./modules/user/user.module').then((m) => m.UserModule),
       },
+      {
+        path: 'report',
+        loadChildren: () =>
+          import('./modules/report/report.module').then((m) => m.ReportModule),
+      },
     ],
   },
   { path: '**', component: ErrorComponent },

@@ -15,12 +15,13 @@ import { LoginService } from '../../../core/service/login/login.service';
 })
 export class ShelfComponent implements OnInit {
   shelves: Shelf[] = [];
-  role: string | null = localStorage.getItem('role');
+  role = this.loginService.getRole();
 
   constructor(
     private shelfService: ShelfService,
     private toastr: ToastrService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private loginService: LoginService
   ) {}
 
   ngOnInit(): void {

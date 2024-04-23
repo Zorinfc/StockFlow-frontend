@@ -42,7 +42,17 @@
             >ITEM</a
           >
         </li>
-        @switch (role) { @case ('admin') {
+        @if (role =='rapor_kullanicisi') {
+        <li class="nav-item">
+          <a
+            routerLinkActive="active"
+            [routerLink]="['./report']"
+            [relativeTo]="route"
+            class="nav-link"
+            >REPORT</a
+          >
+        </li>
+        } @else if(role ==='admin') {
         <li class="nav-item">
           <a
             routerLinkActive="active"
@@ -52,7 +62,9 @@
             >EMPLOYEES</a
           >
         </li>
-        } }
+        }
+        <button (click)="logout()">LogOut</button>
+        <button (click)="test()"></button>
       </ul>
     </div>
   </div>

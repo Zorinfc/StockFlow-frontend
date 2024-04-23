@@ -8,6 +8,7 @@ import { ItemCreate } from '../dto/itemCreate';
 import { DeleteDialogComponent } from '../../../shared/component/delete-dialog/delete-dialog.component';
 import { ItemInOutDialogComponent } from '../../../shared/component/item-in-out-dialog/item-in-out-dialog.component';
 import { ItemInOut } from '../dto/itemInOut';
+import { LoginService } from '../../../core/service/login/login.service';
 
 @Component({
   selector: 'app-item',
@@ -18,12 +19,13 @@ export class ItemComponent implements OnInit {
   items: Item[] = [];
   itemCreate: ItemCreate = { name: '', quantity: 0, min_quantity: 0 };
   itemInOut: ItemInOut = { name: '', count: 0, operator: false };
-  role: string | null = localStorage.getItem('role');
+  role = this.loginService.getRole();
 
   constructor(
     private itemService: ItemService,
     private toastr: ToastrService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private loginService: LoginService
   ) {}
 
   ngOnInit(): void {

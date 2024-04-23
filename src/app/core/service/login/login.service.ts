@@ -12,8 +12,7 @@ export class LoginService {
   token = '';
   email = '';
   password = '';
-  kullanicilarId = '';
-  role: string = '';
+  role = '';
 
   login(email: string, password: string): Observable<any> {
     return this.httpClient
@@ -24,11 +23,7 @@ export class LoginService {
       )
       .pipe(
         map((data) => {
-          // console.log(
-          //   'email =>' + email + 'password =>' + password + 'data =>' + data
-          // );
-          // console.log(data);
-          this.parseLogin(data, email, password);
+          this.parseLogin(data);
           return data;
         })
       );
@@ -40,25 +35,20 @@ export class LoginService {
     this.loggedIn = false;
     this.token = '';
     this.email = '';
-    this.role = '';
+    //this.service.cleareRole();
     localStorage.clear();
   }
 
-  parseLogin(data: string, email: string, password: string) {
-    this.loggedIn = true;
-    this.token = data;
-    this.email = email;
-    this.password = password;
-    let payload = this.parseJwt(this.token);
-    this.role = payload.role;
-
-    localStorage.setItem('token', data);
-    localStorage.setItem('role', this.role);
+  getRole() {
+    return this.role;
   }
 
-  whatRole() {
-    let payload = this.parseJwt(this.token);
-    return payload.role;
+  parseLogin(data: string) {
+    this.loggedIn = true;
+    let payload = this.parseJwt(data);
+    this.role = payload.role;
+    //console.log(this.role);
+    localStorage.setItem('token', data);
   }
 
   parseJwt(token: string) {

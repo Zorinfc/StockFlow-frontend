@@ -1,5 +1,3 @@
-import { publishFacade } from '@angular/compiler';
-
 export class Item {
   constructor(
     public name: string,
