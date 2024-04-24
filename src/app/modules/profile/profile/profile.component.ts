@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../service/user/user.service';
 import { ToastrService } from 'ngx-toastr';
-import { FormBuilder, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { LoginService } from '../../../core/service/login/login.service';
 import { UserPassword } from '../dto/userPassword';
 
@@ -18,24 +18,70 @@ export class ProfileComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {}
   dto: UserPassword = { userEmail: '', password: '', newPassword: '' };
-
   // Minimums eight characters, at least one letter
   // and one number: '^(?=.*[A-Za-z])(?=.*d)[A-Za-zd]{8,}$'
 
-  userForm = this.formBuilder.nonNullable.group({
-    email: [''],
-    role: [''],
-    oldPassword: ['', Validators.required],
-    newPassword: [
-      '',
-      [
-        Validators.minLength(8),
-        Validators.required,
-        Validators.pattern('^(?=.*[A-Za-z])(?=.*d)[A-Za-zd]{8,}$'),
+  userForm = this.formBuilder.nonNullable.group(
+    {
+      email: [''],
+      role: [''],
+      oldPassword: ['', Validators.required],
+      newPassword: ['', [Validators.minLength(8), Validators.required]],
+      newPasswordControl: ['', [Validators.minLength(8), Validators.required]],
+    },
+    {
+      validators: [
+        this.pwLength,
+        this.pwDigit,
+        this.pwLetter,
+        this.pwBigLetter,
+        this.passwordMatchValidator,
       ],
-    ],
-    newPasswordControl: ['', [Validators.minLength(8), Validators.required]],
-  });
+    }
+  );
+
+  // Validators
+
+  passwordMatchValidator(control: AbstractControl) {
+    return control.get('newPassword')?.value ===
+      control.get('newPasswordControl')?.value
+      ? null
+      : { mismatch: true };
+  }
+
+  pwLength(control: AbstractControl) {
+    let password = control.get('newPassword')?.value;
+    if (password.length < 8) {
+      return { minLength: true };
+    }
+    return null;
+  }
+
+  pwDigit(control: AbstractControl) {
+    let password = control.get('newPassword')?.value;
+    if (password.search(/[0-9]/) < 0) {
+      // console.log('Your password must contain at least one digit.');
+      return { digit: true };
+    }
+    return null;
+  }
+
+  pwLetter(control: AbstractControl) {
+    let password = control.get('newPassword')?.value;
+    if (password.search(/[a-z]/) < 0) {
+      return { letter: true };
+    }
+    return null;
+  }
+
+  pwBigLetter(control: AbstractControl) {
+    let password = control.get('newPassword')?.value;
+    if (password.search(/[A-Z]/) < 0) {
+      return { letterBig: true };
+    }
+    return null;
+  }
+
   ngOnInit(): void {
     let email = localStorage.getItem('email');
 

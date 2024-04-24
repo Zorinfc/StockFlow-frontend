@@ -1,4 +1,7 @@
-<div class="container w-25 mt-5 bg-dark grid rounded border border-danger">
+<div
+  class="container w-25 mt-5 grid bg-dark rounded border border-danger"
+  id="newPassword"
+>
   <form class="mb-3 pb-2" [formGroup]="userForm">
     <div class="mb-3 mt-2">
       <label for="email" class="form-label text-light disable"
@@ -29,7 +32,7 @@
         >Old Password</label
       >
       <input
-        type="password"
+        type="text"
         class="form-control"
         name="oldPassword"
         id="oldPassword"
@@ -41,19 +44,40 @@
         >New Password</label
       >
       <input
-        type="password"
+        type="text"
         class="form-control"
         name="newPassword"
         id="newPassword"
         formControlName="newPassword"
       />
+      <!-- VALIDATOR -->
+
+      <ul class="mt-2">
+        <li *ngIf="userForm.errors?.['mismatch']" class="text-light">
+          Passwords must match
+        </li>
+        <li *ngIf="userForm.errors?.['letter']" class="text-light">
+          Password must contain at least 1 lowercase character
+        </li>
+        <li *ngIf="userForm.errors?.['digit']" class="text-light">
+          Password must contain at least 1 digit
+        </li>
+        <li *ngIf="userForm.errors?.['letterBig']" class="text-light">
+          Password must contain at least 1 uppercase character
+        </li>
+        <li *ngIf="userForm.errors?.['minLength']" class="text-light">
+          The password must consist of at least 8 characters
+        </li>
+      </ul>
+
+      <!-- VALIDATOR -->
     </div>
     <div class="mb-3">
       <label for="newPasswordControl" class="form-label text-light"
         >New Password Again</label
       >
       <input
-        type="password"
+        type="text"
         class="form-control"
         name="newPasswordControl"
         id="newPasswordControl"

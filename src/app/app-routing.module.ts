@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './core/component/login/login.component';
 import { MenuComponent } from './core/component/menu/menu.component';
 import { ErrorComponent } from './core/component/error/error.component';
+import { roleControlGuard } from './shared/guard/role-control.guard';
+import { ROLE_ADMIN, ROLE_DEPO, ROLE_RAPOR } from './shared/const/roles';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -18,6 +20,7 @@ const routes: Routes = [
       },
       {
         path: 'shelf',
+
         loadChildren: () =>
           import('./modules/shelf/shelf.module').then((m) => m.ShelfModule),
       },
@@ -28,11 +31,14 @@ const routes: Routes = [
       },
       {
         path: 'user',
+        title: 'User',
+        canActivate: [roleControlGuard(ROLE_ADMIN)],
         loadChildren: () =>
           import('./modules/user/user.module').then((m) => m.UserModule),
       },
       {
         path: 'report',
+        canActivate: [roleControlGuard(ROLE_RAPOR)],
         loadChildren: () =>
           import('./modules/report/report.module').then((m) => m.ReportModule),
       },

@@ -8,7 +8,6 @@ import { Observable, map } from 'rxjs';
 export class LoginService {
   constructor(private httpClient: HttpClient) {}
 
-  loggedIn = false;
   token = '';
   email = '';
   password = '';
@@ -32,7 +31,6 @@ export class LoginService {
     return this.login(this.email, this.password);
   }
   logout() {
-    this.loggedIn = false;
     this.token = '';
     this.email = '';
     //this.service.cleareRole();
@@ -44,8 +42,13 @@ export class LoginService {
     return this.role;
   }
 
+  hasRole(role: string) {
+    if (role === this.role) {
+      return true;
+    } else return false;
+  }
+
   parseLogin(data: string) {
-    this.loggedIn = true;
     let payload = this.parseJwt(data);
     this.role = payload.role;
     let email = payload.email;

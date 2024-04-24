@@ -2,3 +2,33 @@
     user-select: none;
     pointer-events: none;
 }
+
+$color_1: #fff;
+$background-color_1: black;
+
+/* Tooltip text */
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltipp {
+	position: relative;
+	display: inline-block;
+	border-bottom: 1px dotted black;
+	.tooltiptext {
+		// visibility: visible;
+		width: 20rem;
+        height: auto;
+		background-color: $background-color_1;
+		color: $color_1;
+		text-align: center;
+		padding: 5px 0;
+		border-radius: 6px;
+		position: absolute;
+		// z-index: 1;
+        top: -5px;
+        right: 105%;
+	}
+	&:hover {
+		.tooltiptext {
+			visibility: visible;
+		}
+	}
+}
