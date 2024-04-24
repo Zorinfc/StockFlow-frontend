@@ -3,6 +3,7 @@ import { User } from '../../user/dto/user';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UserDTO } from '../../../shared/dto/userDTO';
+import { UserPassword } from '../../../modules/profile/dto/userPassword';
 
 @Injectable({
   providedIn: 'root',
@@ -40,6 +41,12 @@ export class UserService {
       {
         params: params,
       }
+    );
+  }
+  changePassword(dto: UserPassword): Observable<any> {
+    return this.httpClient.post<string>(
+      'http://localhost:8080/api/v1/user/password',
+      dto
     );
   }
 }

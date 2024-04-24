@@ -40,6 +40,7 @@ export class LoginService {
   }
 
   getRole() {
+    this.parseLogin(localStorage.getItem('token')!);
     return this.role;
   }
 
@@ -47,9 +48,11 @@ export class LoginService {
     this.loggedIn = true;
     let payload = this.parseJwt(data);
     this.role = payload.role;
-    //console.log(this.role);
+    let email = payload.email;
+
     localStorage.setItem('token', data);
-    localStorage.setItem('role', this.role);
+    // localStorage.setItem('role', this.role);
+    localStorage.setItem('email', email);
   }
 
   parseJwt(token: string) {

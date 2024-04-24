@@ -41,14 +41,14 @@
             </div>
             @if (report.active == false) {
             <span
-              class="icon delete disable material-symbols-outlined"
+              class="icon delete material-symbols-outlined"
               (click)="deleteReport(report.id)"
             >
               delete
             </span>
             }@else {
             <span
-              class="icon delete material-symbols-outlined"
+              class="icon delete disable material-symbols-outlined"
               (click)="deleteReport(report.id)"
             >
               delete

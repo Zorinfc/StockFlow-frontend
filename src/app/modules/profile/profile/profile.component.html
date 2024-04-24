@@ -1,1 +1,77 @@
-<p>profile works!</p>
+<div class="container w-25 mt-5 bg-dark grid rounded border border-danger">
+  <form class="mb-3 pb-2" [formGroup]="userForm">
+    <div class="mb-3 mt-2">
+      <label for="email" class="form-label text-light disable"
+        >Email address</label
+      >
+      <input
+        type="email"
+        class="form-control email"
+        name="email"
+        id="email"
+        formControlName="email"
+        readonly
+      />
+    </div>
+    <div class="mb-3">
+      <label for="role" class="form-label text-light">Role</label>
+      <input
+        type="text"
+        class="form-control disable"
+        name="role"
+        id="role"
+        readonly
+        formControlName="role"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="oldPassword" class="form-label text-light"
+        >Old Password</label
+      >
+      <input
+        type="password"
+        class="form-control"
+        name="oldPassword"
+        id="oldPassword"
+        formControlName="oldPassword"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="newPassword" class="form-label text-light"
+        >New Password</label
+      >
+      <input
+        type="password"
+        class="form-control"
+        name="newPassword"
+        id="newPassword"
+        formControlName="newPassword"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="newPasswordControl" class="form-label text-light"
+        >New Password Again</label
+      >
+      <input
+        type="password"
+        class="form-control"
+        name="newPasswordControl"
+        id="newPasswordControl"
+        formControlName="newPasswordControl"
+      />
+    </div>
+    <div class="mb-3 d-grid gap-1 mx-auto">
+      <button
+        type="button"
+        class="btn btn-success"
+        (click)="submit()"
+        [disabled]="userForm.invalid"
+      >
+        Save Changes
+      </button>
+      <button type="button" class="btn btn-danger" (click)="reset()">
+        Reset All
+      </button>
+    </div>
+  </form>
+</div>

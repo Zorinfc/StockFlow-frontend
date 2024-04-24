@@ -14,7 +14,9 @@
         <th>Capacity</th>
         <th>Item Quantity</th>
         <th>Item Name</th>
+        @if (role =='admin' || role =='depo_sorumlusu') {
         <th>Actions</th>
+        }
       </tr>
     </thead>
     <tbody>
@@ -24,8 +26,8 @@
         <td>{{ shelf.capacity }}</td>
         <td>{{ shelf.quantity }}</td>
         <td>{{ shelf.itemName }}</td>
+        @if (role !='rapor_kullanicisi') {
         <td>
-          @if (role !='rapor_kullanicisi') {
           <div class="d-flex justify-content-center">
             <span
               class="icon edit material-symbols-outlined"
@@ -39,8 +41,8 @@
               >delete</span
             >
           </div>
-          }
         </td>
+        }
       </tr>
       }@else {
       <tr>
@@ -48,22 +50,17 @@
         <td>{{ shelf.capacity }}</td>
         <td>{{ shelf.quantity }}</td>
         <td>Empty</td>
+        @if (role !='rapor_kullanicisi') {
         <td>
-          @if (role !='rapor_kullanicisi') {
           <div class="d-flex justify-content-center">
-            <!-- <span
-              class="icon edit material-symbols-outlined"
-              (click)="edit(shelf.no)"
-              >remove</span
-            > -->
             <span
               class="icon delete material-symbols-outlined"
               (click)="deleteShelf(shelf.no)"
               >delete</span
             >
           </div>
-          }
         </td>
+        }
       </tr>
       } }
     </tbody>
