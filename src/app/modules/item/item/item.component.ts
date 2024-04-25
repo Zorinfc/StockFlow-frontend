@@ -9,6 +9,9 @@ import { DeleteDialogComponent } from '../../../shared/component/delete-dialog/d
 import { ItemInOutDialogComponent } from '../../../shared/component/item-in-out-dialog/item-in-out-dialog.component';
 import { ItemInOut } from '../dto/itemInOut';
 import { LoginService } from '../../../core/service/login/login.service';
+import { CreateReportDialogComponent } from '../../../shared/component/create-report-dialog/create-report-dialog.component';
+import { HomeService } from '../../service/home/home.service';
+import { CreateReportDTO } from '../../../shared/dto/createReportDTO';
 
 @Component({
   selector: 'app-item',
@@ -21,11 +24,18 @@ export class ItemComponent implements OnInit {
   itemInOut: ItemInOut = { name: '', count: 0, operator: false };
   role = this.loginService.getRole();
 
+  reportCreate: CreateReportDTO = {
+    itemName: '',
+    userEmail: '',
+    description: '',
+  };
+
   constructor(
     private itemService: ItemService,
     private toastr: ToastrService,
     public dialog: MatDialog,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private homeService: HomeService
   ) {}
 
   ngOnInit(): void {
@@ -57,7 +67,9 @@ export class ItemComponent implements OnInit {
           this.itemService.addItem(this.itemCreate).subscribe({
             next: (response) => {
               this.refreshItems();
-              this.toastr.info('item added');
+              this.toastr.info('item added', 'Item System', {
+                timeOut: 2000,
+              });
             },
             error: (err) => {
               this.toastr.error('There is not any empty shelf');
@@ -82,11 +94,15 @@ export class ItemComponent implements OnInit {
             next: (response) => {
               this.refreshItems();
               if (response == true) {
-                this.toastr.info('item deleted');
+                this.toastr.info('item deleted', 'Item System', {
+                  timeOut: 2000,
+                });
               }
             },
             error: (err) => {
-              this.toastr.error('error occured');
+              this.toastr.error('error occured', 'Item System', {
+                timeOut: 2000,
+              });
             },
           });
         }
@@ -112,16 +128,22 @@ export class ItemComponent implements OnInit {
           this.itemService.inOutItem(this.itemInOut).subscribe({
             next: (response) => {
               this.refreshItems();
-              this.toastr.info('Item Added');
+              this.toastr.info('Item Added', 'Item System', {
+                timeOut: 2000,
+              });
             },
             error: (err) => {
-              this.toastr.error('error occured');
+              this.toastr.error('error occured', 'Item System', {
+                timeOut: 2000,
+              });
             },
           });
         }
       },
       error: (err) => {
-        this.toastr.error('error occured');
+        this.toastr.error('error occured', 'Item System', {
+          timeOut: 2000,
+        });
       },
     });
   }
@@ -144,16 +166,52 @@ export class ItemComponent implements OnInit {
           this.itemService.inOutItem(this.itemInOut).subscribe({
             next: () => {
               this.refreshItems();
-              this.toastr.info('Item Exported');
+              this.toastr.info('Item Exported', 'Item System', {
+                timeOut: 2000,
+              });
             },
             error: (err) => {
-              this.toastr.error('error occured');
+              this.toastr.error('error occured', 'Item System', {
+                timeOut: 2000,
+              });
             },
           });
         }
       },
       error: (err) => {
-        this.toastr.error('error occured');
+        this.toastr.error('error occured', 'Item System', {
+          timeOut: 2000,
+        });
+      },
+    });
+  }
+
+  createReport(name: string) {
+    let dialog = this.dialog.open(CreateReportDialogComponent, {
+      width: '250px',
+      enterAnimationDuration: '250ms',
+      exitAnimationDuration: '250ms',
+      data: {
+        userEmail: localStorage.getItem('email'),
+        itemName: name,
+      },
+    });
+
+    dialog.afterClosed().subscribe({
+      next: (response) => {
+        if (response?.object != undefined) {
+          this.reportCreate.userEmail = response.object.value.userEmail;
+          this.reportCreate.itemName = response.object.value.itemName;
+          this.reportCreate.description = response.object.value.description;
+          this.homeService.createReport(this.reportCreate).subscribe({
+            next: (resp) => {
+              this.refreshItems();
+              this.toastr.info('Report created !', 'Report System', {
+                timeOut: 2000,
+              });
+            },
+          });
+        }
       },
     });
   }

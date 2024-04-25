@@ -11,6 +11,7 @@ import { AddUserComponent } from './component/add-user/add-user.component';
 import { SuccessDialogComponent } from './component/success-dialog/success-dialog.component';
 import { UpdateUserComponent } from './component/update-user/update-user.component';
 import { EditShelfComponent } from './component/edit-shelf/edit-shelf.component';
+import { CreateReportDialogComponent } from './component/create-report-dialog/create-report-dialog.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { EditShelfComponent } from './component/edit-shelf/edit-shelf.component'
     SuccessDialogComponent,
     UpdateUserComponent,
     EditShelfComponent,
+    CreateReportDialogComponent,
   ],
   imports: [
     CommonModule,

@@ -48,6 +48,17 @@ export class LoginService {
     } else return false;
   }
 
+  tokenControl() {
+    let token = localStorage.getItem('token');
+    let payload = this.parseJwt(token!);
+    let tarih = payload.exp;
+    let now = Date.now() / 1000;
+    //console.log(parseInt(tarih!));
+    if (parseInt(tarih!) > now) {
+      return true;
+    } else return false;
+  }
+
   parseLogin(data: string) {
     let payload = this.parseJwt(data);
     this.role = payload.role;

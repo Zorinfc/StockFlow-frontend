@@ -66,19 +66,27 @@ export class UserComponent implements OnInit {
               if (response) {
                 this.passwordDialog(password);
                 this.refreshTable();
-                this.toastr.info('Employee Added!');
+                this.toastr.info('Employee Added!', 'User System', {
+                  timeOut: 2000,
+                });
               } else {
-                this.toastr.error('User allredy exist!');
+                this.toastr.error('User allredy exist!', 'User System', {
+                  timeOut: 2000,
+                });
               }
             },
             error: (err) => {
-              this.toastr.error('!!error!');
+              this.toastr.error('error!', 'User System', {
+                timeOut: 2000,
+              });
             },
           });
         }
       },
       error: (err) => {
-        this.toastr.error(err);
+        this.toastr.error(err, 'User System', {
+          timeOut: 2000,
+        });
       },
     });
   }
@@ -96,11 +104,15 @@ export class UserComponent implements OnInit {
             next: (response) => {
               this.refreshTable();
               if (response == true) {
-                this.toastr.success('user deleted');
+                this.toastr.success('user deleted', 'User System', {
+                  timeOut: 2000,
+                });
               }
             },
             error: (err) => {
-              this.toastr.error('error occured');
+              this.toastr.error('error occured', 'User System', {
+                timeOut: 2000,
+              });
             },
           });
         }

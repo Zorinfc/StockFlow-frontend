@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../../user/dto/user';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UserDTO } from '../../../shared/dto/userDTO';
 import { UserPassword } from '../../../modules/profile/dto/userPassword';
@@ -10,27 +10,39 @@ import { UserPassword } from '../../../modules/profile/dto/userPassword';
 })
 export class UserService {
   constructor(private httpClient: HttpClient) {}
+  headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ` + localStorage.getItem('token'),
+  });
 
   getUsers(): Observable<User[]> {
-    return this.httpClient.get<User[]>('http://localhost:8080/api/v1/user');
+    return this.httpClient.get<User[]>('http://localhost:8080/api/v1/user', {
+      headers: this.headers,
+    });
   }
 
   deleteUser(email: string): Observable<any> {
-    return this.httpClient.post('http://localhost:8080/api/v1/user/delete', {
-      email,
-    });
+    return this.httpClient.post(
+      'http://localhost:8080/api/v1/user/delete',
+      {
+        email,
+      },
+      { headers: this.headers }
+    );
   }
   addUser(dto: UserDTO): Observable<any> {
     return this.httpClient.post(
       'http://localhost:8080/api/v1/user/create',
-      dto
+      dto,
+      { headers: this.headers }
     );
   }
 
   updateUser(dto: UserDTO): Observable<any> {
     return this.httpClient.post(
       'http://localhost:8080/api/v1/user/update',
-      dto
+      dto,
+      { headers: this.headers }
     );
   }
 
@@ -40,13 +52,15 @@ export class UserService {
       'http://localhost:8080/api/v1/user/get',
       {
         params: params,
+        headers: this.headers,
       }
     );
   }
   changePassword(dto: UserPassword): Observable<any> {
     return this.httpClient.post<string>(
       'http://localhost:8080/api/v1/user/password',
-      dto
+      dto,
+      { headers: this.headers }
     );
   }
 }

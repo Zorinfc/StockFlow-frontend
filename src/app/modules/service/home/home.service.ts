@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Report } from '../../home/dto/report';
+import { CreateReportDTO } from '../../../shared/dto/createReportDTO';
 
 @Injectable({
   providedIn: 'root',
@@ -47,6 +48,13 @@ export class HomeService {
       {
         id,
       },
+      { headers: this.headers }
+    );
+  }
+  createReport(dto: CreateReportDTO): Observable<any> {
+    return this.httpClient.post(
+      'http://localhost:8080/api/v1/report/create',
+      dto,
       { headers: this.headers }
     );
   }

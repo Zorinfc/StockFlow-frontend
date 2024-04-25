@@ -45,6 +45,15 @@
               >delete</span
             >
           </div>
+          }@else {
+          <div class="d-flex justify-content-center">
+            <span
+              class="icon material-symbols-outlined"
+              (click)="createReport(item.name)"
+            >
+              report
+            </span>
+          </div>
           }
         </td>
       </tr>

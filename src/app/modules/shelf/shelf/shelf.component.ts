@@ -47,7 +47,10 @@ export class ShelfComponent implements OnInit {
           this.shelfService.editShelf(no, response).subscribe({
             next: (resp) => {
               if (resp.result != 0) {
-                // this.toastr.info(resp);
+                console.log(resp);
+                this.toastr.info('Item Removed!', 'Shelf System', {
+                  timeOut: 2000,
+                });
                 this.refreshShelves();
               }
             },
@@ -72,13 +75,19 @@ export class ShelfComponent implements OnInit {
               this.refreshShelves();
               // console.log('data==>' + data);
               if (data == true) {
-                this.toastr.info('Shelf deleted');
+                this.toastr.info('Shelf deleted', 'Shelf System', {
+                  timeOut: 2000,
+                });
               } else {
-                this.toastr.error('Shelf has an item');
+                this.toastr.error('Shelf has an item', 'Shelf System', {
+                  timeOut: 2000,
+                });
               }
             },
             error: (err) => {
-              this.toastr.error('error');
+              this.toastr.error('error', 'Shelf System', {
+                timeOut: 2000,
+              });
             },
           });
         }
@@ -101,13 +110,19 @@ export class ShelfComponent implements OnInit {
             next: (resp) => {
               this.refreshShelves();
               if (resp == 0 && resp != undefined) {
-                this.toastr.error('Can`t add shelf');
+                this.toastr.error('Can`t add shelf', 'Shelf System', {
+                  timeOut: 2000,
+                });
               } else {
-                this.toastr.info('shelves added');
+                this.toastr.info('shelves added', 'Shelf System', {
+                  timeOut: 2000,
+                });
               }
             },
             error: (err) => {
-              this.toastr.error('error occured');
+              this.toastr.error('error occured', 'Shelf System', {
+                timeOut: 2000,
+              });
             },
           });
         }

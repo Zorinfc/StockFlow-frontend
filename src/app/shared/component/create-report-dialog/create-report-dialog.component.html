@@ -1,0 +1,31 @@
+<div
+  class="d-flex justify-content-center align-items-center flex-column mx-4 my-4"
+>
+  <form [formGroup]="reportForm">
+    <label for="email">Email : </label>
+    <input
+      class="mt-2"
+      type="text"
+      name="email"
+      formControlName="userEmail"
+      id="email"
+    />
+    <label for="itemName">itemName : </label>
+    <input
+      class="mt-2"
+      type="text"
+      name="itemName"
+      formControlName="itemName"
+      id="itemName"
+    />
+    <label for="description">description : </label>
+    <input
+      class="mt-2"
+      type="text"
+      name="description"
+      formControlName="description"
+      id="description"
+    />
+  </form>
+  <button class="btn btn-primary mt-2" (click)="yes()">Create Report</button>
+</div>

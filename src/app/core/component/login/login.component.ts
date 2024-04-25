@@ -28,11 +28,15 @@ export class LoginComponent {
     this.loginService.login(email, password).subscribe({
       next: (data) => {
         this.router.navigate(['menu/home']);
-        this.toastr.success('giris basarili');
+        this.toastr.success('giris basarili', 'Login System', {
+          timeOut: 2000,
+        });
         this.loginService.getRole();
       },
       error: (err) => {
-        this.toastr.error('basarisiz');
+        this.toastr.error('basarisiz', 'Login System', {
+          timeOut: 2000,
+        });
       },
     });
   }
