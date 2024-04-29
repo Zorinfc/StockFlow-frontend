@@ -7,20 +7,27 @@ import { LoginComponent } from './core/component/login/login.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {
-  HttpClientModule,
-  provideHttpClient,
-  withInterceptors,
-} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { MenuComponent } from './core/component/menu/menu.component';
 import { ErrorComponent } from './core/component/error/error.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SharedModule } from './shared/shared.module';
-import { UserComponent } from './modules/user/user/user.component';
+import { DenemelerComponent } from './core/component/denemeler/denemeler.component';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatInputModule } from '@angular/material/input';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { DataTablesModule } from 'angular-datatables';
 @NgModule({
-  declarations: [AppComponent, LoginComponent, MenuComponent, ErrorComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    MenuComponent,
+    ErrorComponent,
+    DenemelerComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -32,8 +39,20 @@ import { UserComponent } from './modules/user/user/user.component';
     MatIconModule,
     MatDialogModule,
     SharedModule,
+    MatInputModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    DataTablesModule,
   ],
-  providers: [provideAnimationsAsync(), provideAnimationsAsync()],
+  exports: [MatPaginatorModule, MatSortModule],
+  providers: [
+    provideAnimationsAsync(),
+    provideAnimationsAsync(),
+    MatPaginator,
+    MatSort,
+    MatTableDataSource,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

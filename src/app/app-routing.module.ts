@@ -6,6 +6,7 @@ import { ErrorComponent } from './core/component/error/error.component';
 import { roleControlGuard } from './shared/guard/role-control/role-control.guard';
 import { ROLE_ADMIN, ROLE_DEPO, ROLE_RAPOR } from './shared/const/roles';
 import { loggedInControlGuard } from './shared/guard/logged-in-control/logged-in-control.guard';
+import { DenemelerComponent } from './core/component/denemeler/denemeler.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -61,6 +62,7 @@ const routes: Routes = [
       },
     ],
   },
+  { path: 'deneme', component: DenemelerComponent },
   { path: '**', component: ErrorComponent, title: 'Error' },
 ];
 

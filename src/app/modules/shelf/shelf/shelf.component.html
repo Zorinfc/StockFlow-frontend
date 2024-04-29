@@ -7,12 +7,13 @@
 
   <!-- <a class="btn btn-primary btn-nueva"><b>+</b> Add Shelf </a> -->
   <button class="btn btn-primary mb-3" (click)="addShelf()">Add Shelf +</button>
-  <table class="table table-bordered table-hover">
+  <table datatable class="table table-bordered table-hover">
     <thead>
       <tr>
         <th>No</th>
         <th>Capacity</th>
         <th>Item Quantity</th>
+        <th>Empty Space</th>
         <th>Item Name</th>
         @if (role =='admin' || role =='depo_sorumlusu') {
         <th>Actions</th>
@@ -25,6 +26,7 @@
         <td>{{ shelf.no }}</td>
         <td>{{ shelf.capacity }}</td>
         <td>{{ shelf.quantity }}</td>
+        <td>{{ shelf.capacity - shelf.quantity }}</td>
         <td>{{ shelf.itemName }}</td>
         @if (role !='rapor_kullanicisi') {
         <td>
@@ -49,6 +51,7 @@
         <td>{{ shelf.no }}</td>
         <td>{{ shelf.capacity }}</td>
         <td>{{ shelf.quantity }}</td>
+        <td>{{ shelf.capacity - shelf.quantity }}</td>
         <td>Empty</td>
         @if (role !='rapor_kullanicisi') {
         <td>

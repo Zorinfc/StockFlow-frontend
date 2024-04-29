@@ -100,9 +100,14 @@ export class ItemComponent implements OnInit {
               }
             },
             error: (err) => {
-              this.toastr.error('error occured', 'Item System', {
-                timeOut: 2000,
-              });
+              this.toastr.error(
+                'You need to check report/shelves to this item',
+                'Item System',
+                {
+                  timeOut: 2000,
+                }
+              );
+              console.log(err);
             },
           });
         }

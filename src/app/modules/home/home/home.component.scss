@@ -8,6 +8,7 @@
     padding:.5rem 1rem ;
     border-radius: 6px;
     text-align: center;
+
 }
 .card-text{
     margin :0
@@ -18,4 +19,10 @@ hr {
     background-color: darkslategray;
     border-color: darkslategray;
     margin-top :0;
+}
+*{
+    width: auto;
+}
+.display{
+    display: ruby;
 }

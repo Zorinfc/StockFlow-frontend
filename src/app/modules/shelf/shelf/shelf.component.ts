@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ShelfService } from '../../service/shelf/shelf.service';
 import { Shelf } from '../dto/shelf';
 import { ToastrService } from 'ngx-toastr';
@@ -7,13 +7,14 @@ import { DeleteDialogComponent } from '../../../shared/component/delete-dialog/d
 import { CreateShelfDialogComponent } from '../../../shared/component/create-shelf-dialog/create-shelf-dialog.component';
 import { EditShelfComponent } from '../../../shared/component/edit-shelf/edit-shelf.component';
 import { LoginService } from '../../../core/service/login/login.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-shelf',
   templateUrl: './shelf.component.html',
   styleUrl: './shelf.component.scss',
 })
-export class ShelfComponent implements OnInit {
+export class ShelfComponent implements OnInit, OnDestroy {
   shelves: Shelf[] = [];
   role = this.loginService.getRole();
 
@@ -24,6 +25,12 @@ export class ShelfComponent implements OnInit {
     private loginService: LoginService
   ) {}
 
+  dtTrigger: Subject<any> = new Subject();
+  ngOnDestroy(): void {
+    // Evente unsubscribe olmayı unutmamak gerekiyor.
+    this.dtTrigger.unsubscribe();
+  }
+
   ngOnInit(): void {
     this.refreshShelves();
   }
@@ -31,6 +38,7 @@ export class ShelfComponent implements OnInit {
   refreshShelves() {
     this.shelfService.getShelves().subscribe({
       next: (data) => {
+        this.dtTrigger.next;
         this.shelves = data;
       },
     });
