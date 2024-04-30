@@ -1,115 +1,23 @@
-<div class="container w-75 h-auto">
-  <!--   
-  <mat-form-field>
-    <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" #input />
-  </mat-form-field>
-
-  <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" matSort>
-
-      <ng-container matColumnDef="no">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>NO</th>
-        <td mat-cell *matCellDef="let shelf">{{ shelf.no }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="capacity">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Capacity</th>
-        <td mat-cell *matCellDef="let shelf">{{ shelf.capacity }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="quantity">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Quantity</th>
-        <td mat-cell *matCellDef="let shelf">{{ shelf.quantity }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="itemName">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Item Name</th>
-        <td mat-cell *matCellDef="let shelf">{{ shelf.itemName }}</td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="dColumn"></tr>
-      <tr mat-row *matRowDef="let shelf; columns: dColumn"></tr>
-
-      <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" colspan="4">
-          No data matching the filter "{{ input.value }}"
-        </td>
-      </tr>
-    </table>
-    <mat-paginator
-      [pageSize]="5"
-      [pageSizeOptions]="[5, 10, 50]"
-      aria-label="Select page of users"
-    ></mat-paginator>
-  </div> -->
-
-  <!-- Sort deneme tablosu -->
-
-  <!-- <table matSort (matSortChange)="sortData($event)">
-    <tr>
-      <th mat-sort-header="no">Number</th>
-      <th mat-sort-header="capacity">Capacity</th>
-      <th mat-sort-header="quantity">Quantity</th>
-      <th mat-sort-header="itemName">Item</th>
-    </tr>
-
-    <tr *ngFor="let shelf of sortedData">
-      <td>{{ shelf.no }}</td>
-      <td>{{ shelf.capacity }}</td>
-      <td>{{ shelf.quantity }}</td>
-      <td>{{ shelf.itemName }}</td>
-    </tr>
-  </table> -->
-
-  <!-- filter data -->
-  <!-- <mat-form-field>
-    <mat-label>Filter</mat-label>
-    <input
-      matInput
-      (keyup)="applyFilter($event)"
-      placeholder="Ex. ium"
-      #input
-    />
-  </mat-form-field> -->
-
+<div class="container w-75 h-auto mt-5 pt-5">
   <table
-    mat-table
-    [dataSource]="sortedData"
-    matSort
-    (matSortChange)="sortData($event)"
-    class="mat-elevation-z8"
+    datatable
+    class="table row-border hover"
+    [dtOptions]="dtOptions"
+    [dtTrigger]="dtTrigger"
   >
-    <ng-container matColumnDef="no">
-      <th mat-sort-header="no" *matHeaderCellDef>No.</th>
-      <td mat-cell *matCellDef="let shelf">{{ shelf.no }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="capacity">
-      <th mat-sort-header="capacity" *matHeaderCellDef>Capacity</th>
-      <td mat-cell *matCellDef="let shelf">{{ shelf.capacity }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="quantity">
-      <th mat-sort-header="quantity" *matHeaderCellDef>Quantity</th>
-      <td mat-cell *matCellDef="let shelf">{{ shelf.quantity }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="itemName">
-      <th mat-sort-header="itemName" *matHeaderCellDef>itemName</th>
-      <td mat-cell *matCellDef="let shelf">{{ shelf.itemName }}</td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="columndef"></tr>
-    <tr mat-row *matRowDef="let row; columns: columndef"></tr>
+    <thead>
+      <tr>
+        <th>no</th>
+        <th>Quantity</th>
+        <th>Item</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let shelf of results">
+        <td>{{ shelf.no }}</td>
+        <td>{{ shelf.quantity }}</td>
+        <td>{{ shelf.itemName }}</td>
+      </tr>
+    </tbody>
   </table>
-  <mat-paginator
-    (page)="handlePage($event)"
-    [length]="length"
-    [pageSize]="pageSize"
-    [showFirstLastButtons]="showFirstLastButtons"
-    [pageSizeOptions]="pageSizeOptions"
-    [pageIndex]="pageIndex"
-    aria-label="Select !!!!!!"
-  ></mat-paginator>
 </div>

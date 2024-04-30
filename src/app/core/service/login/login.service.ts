@@ -15,11 +15,7 @@ export class LoginService {
 
   login(email: string, password: string): Observable<any> {
     return this.httpClient
-      .post(
-        'http://localhost:8080/api/v1/login',
-        { email, password },
-        { responseType: 'text' }
-      )
+      .post('/login', { email, password }, { responseType: 'text' })
       .pipe(
         map((data) => {
           this.parseLogin(data);

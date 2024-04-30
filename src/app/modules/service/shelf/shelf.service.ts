@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Shelf } from '../../shelf/dto/shelf';
@@ -8,48 +8,26 @@ import { Shelf } from '../../shelf/dto/shelf';
 })
 export class ShelfService {
   constructor(private httpClient: HttpClient) {}
-  headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ` + localStorage.getItem('token'),
-  });
-
   getShelves(): Observable<Shelf[]> {
-    return this.httpClient.get<Shelf[]>(
-      'http://localhost:8080/api/v1/shelf/get',
-      {
-        headers: this.headers,
-      }
-    );
+    return this.httpClient.get<Shelf[]>('/shelf/get');
   }
 
   deleteItem(no: number): Observable<any> {
-    return this.httpClient.post(
-      'http://localhost:8080/api/v1/shelf/delete',
-      {
-        no,
-      },
-      { headers: this.headers }
-    );
+    return this.httpClient.post('/shelf/delete', {
+      no,
+    });
   }
 
   addShelf(count: number): Observable<any> {
-    return this.httpClient.post(
-      'http://localhost:8080/api/v1/shelf/add',
-      {
-        count,
-      },
-      { headers: this.headers }
-    );
+    return this.httpClient.post('/shelf/add', {
+      count,
+    });
   }
 
   editShelf(no: number, quantity: number): Observable<any> {
-    return this.httpClient.post(
-      'http://localhost:8080/api/v1/shelf/edit',
-      {
-        no,
-        quantity,
-      },
-      { headers: this.headers }
-    );
+    return this.httpClient.post('/shelf/edit', {
+      no,
+      quantity,
+    });
   }
 }

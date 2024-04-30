@@ -7,7 +7,11 @@ import { LoginComponent } from './core/component/login/login.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import {
+  HttpClientModule,
+  provideHttpClient,
+  withInterceptors,
+} from '@angular/common/http';
 import { MenuComponent } from './core/component/menu/menu.component';
 import { ErrorComponent } from './core/component/error/error.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -20,6 +24,9 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { DataTablesModule } from 'angular-datatables';
+import { urlInterceptor } from './core/interceptor/url.interceptor';
+import { APP_CONFIG } from './app.config';
+import { environment } from '../environments/environment.development';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +56,7 @@ import { DataTablesModule } from 'angular-datatables';
   providers: [
     provideAnimationsAsync(),
     provideAnimationsAsync(),
+    provideHttpClient(withInterceptors([urlInterceptor])),
     MatPaginator,
     MatSort,
     MatTableDataSource,

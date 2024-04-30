@@ -1,13 +1,11 @@
-<div
+<!-- <div
   class="container d-flex flex-column justify-content-center align-items-center"
 >
   <div class="title-box">
     <h1>SHELF MANAGEMENT</h1>
   </div>
-
-  <!-- <a class="btn btn-primary btn-nueva"><b>+</b> Add Shelf </a> -->
   <button class="btn btn-primary mb-3" (click)="addShelf()">Add Shelf +</button>
-  <table datatable class="table table-bordered table-hover">
+  <table class="table table-bordered table-hover">
     <thead>
       <tr>
         <th>No</th>
@@ -68,4 +66,115 @@
       } }
     </tbody>
   </table>
+</div> -->
+<div class="container">
+  <div class="title-box">
+    <h1>SHELF MANAGEMENT</h1>
+  </div>
+  <div class="d-flex justify-content-end gap-2 mt-4">
+    <input class="searchBox" (keyup)="filterChange($event)" type="text" />
+    <button class="btn btn-primary" (click)="addShelf()">Add Shelf +</button>
+  </div>
+  <table class="mt-4" matSort mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="no">
+      <th
+        class="fw-bolder fs-5"
+        mat-sort-header
+        mat-header-cell
+        *matHeaderCellDef
+      >
+        Id
+      </th>
+      <td mat-cell *matCellDef="let shelf">{{ shelf.no }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="capacity">
+      <th
+        class="fw-bolder fs-5"
+        mat-sort-header
+        mat-header-cell
+        *matHeaderCellDef
+      >
+        Capacity
+      </th>
+      <td mat-cell *matCellDef="let shelf">{{ shelf.capacity }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="quantity">
+      <th
+        class="fw-bolder fs-5"
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        Quantity
+      </th>
+      <td mat-cell *matCellDef="let shelf">{{ shelf.quantity }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="emptySpace">
+      <th
+        class="fw-bolder fs-5"
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        Empty Space
+      </th>
+      <td mat-cell *matCellDef="let shelf">
+        {{ shelf.emptySpace }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="itemName">
+      <th
+        class="fw-bolder fs-5"
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        Item
+      </th>
+      <td mat-cell *matCellDef="let shelf">
+        {{ shelf.itemName }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th class="fw-bolder fs-5" mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let shelf">
+        <div>
+          @if (shelf.itemName == 'empty'){
+          <span
+            class="icon edit material-symbols-outlined disable"
+            (click)="edit(shelf.no)"
+          >
+            remove
+          </span>
+          } @else {
+          <span
+            class="icon edit material-symbols-outlined"
+            (click)="edit(shelf.no)"
+          >
+            remove
+          </span>
+          }
+          <span
+            class="icon delete material-symbols-outlined"
+            (click)="deleteShelf(shelf.no)"
+            >delete</span
+          >
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator
+    showFirstLastButtons
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 20]"
+  ></mat-paginator>
 </div>

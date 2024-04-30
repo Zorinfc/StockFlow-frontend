@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ShelfService } from '../../service/shelf/shelf.service';
 import { Shelf } from '../dto/shelf';
 import { ToastrService } from 'ngx-toastr';
@@ -7,14 +7,17 @@ import { DeleteDialogComponent } from '../../../shared/component/delete-dialog/d
 import { CreateShelfDialogComponent } from '../../../shared/component/create-shelf-dialog/create-shelf-dialog.component';
 import { EditShelfComponent } from '../../../shared/component/edit-shelf/edit-shelf.component';
 import { LoginService } from '../../../core/service/login/login.service';
-import { Subject } from 'rxjs';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-shelf',
   templateUrl: './shelf.component.html',
   styleUrl: './shelf.component.scss',
 })
-export class ShelfComponent implements OnInit, OnDestroy {
+export class ShelfComponent implements OnInit {
   shelves: Shelf[] = [];
   role = this.loginService.getRole();
 
@@ -25,24 +28,41 @@ export class ShelfComponent implements OnInit, OnDestroy {
     private loginService: LoginService
   ) {}
 
-  dtTrigger: Subject<any> = new Subject();
-  ngOnDestroy(): void {
-    // Evente unsubscribe olmayı unutmamak gerekiyor.
-    this.dtTrigger.unsubscribe();
-  }
+  dataSource: any;
+  displayedColumns: string[] = [
+    'no',
+    'capacity',
+    'quantity',
+    'emptySpace',
+    'itemName',
+    'actions',
+  ];
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort!: MatSort;
+
+  ngAfterViewInit() {}
 
   ngOnInit(): void {
     this.refreshShelves();
   }
 
+  filterChange(data: Event) {
+    const value = (data.target as HTMLInputElement).value;
+    this.dataSource.filter = value;
+  }
+
   refreshShelves() {
     this.shelfService.getShelves().subscribe({
       next: (data) => {
-        this.dtTrigger.next;
+        this.dataSource = new MatTableDataSource<Shelf>(data);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
         this.shelves = data;
+        console.log(data);
       },
     });
   }
+
   edit(no: number) {
     let dialog = this.dialog.open(EditShelfComponent, {
       width: '250px',
