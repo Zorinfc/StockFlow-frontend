@@ -1,79 +1,17 @@
-<!-- <div
-  class="container d-flex flex-column justify-content-center align-items-center"
->
-  <div class="title-box">
-    <h1>SHELF MANAGEMENT</h1>
-  </div>
-  <button class="btn btn-primary mb-3" (click)="addShelf()">Add Shelf +</button>
-  <table class="table table-bordered table-hover">
-    <thead>
-      <tr>
-        <th>No</th>
-        <th>Capacity</th>
-        <th>Item Quantity</th>
-        <th>Empty Space</th>
-        <th>Item Name</th>
-        @if (role =='admin' || role =='depo_sorumlusu') {
-        <th>Actions</th>
-        }
-      </tr>
-    </thead>
-    <tbody>
-      @for (shelf of shelves; track $index) { @if (shelf.itemName != null) {
-      <tr>
-        <td>{{ shelf.no }}</td>
-        <td>{{ shelf.capacity }}</td>
-        <td>{{ shelf.quantity }}</td>
-        <td>{{ shelf.capacity - shelf.quantity }}</td>
-        <td>{{ shelf.itemName }}</td>
-        @if (role !='rapor_kullanicisi') {
-        <td>
-          <div class="d-flex justify-content-center">
-            <span
-              class="icon edit material-symbols-outlined"
-              (click)="edit(shelf.no)"
-            >
-              remove
-            </span>
-            <span
-              class="icon delete material-symbols-outlined"
-              (click)="deleteShelf(shelf.no)"
-              >delete</span
-            >
-          </div>
-        </td>
-        }
-      </tr>
-      }@else {
-      <tr>
-        <td>{{ shelf.no }}</td>
-        <td>{{ shelf.capacity }}</td>
-        <td>{{ shelf.quantity }}</td>
-        <td>{{ shelf.capacity - shelf.quantity }}</td>
-        <td>Empty</td>
-        @if (role !='rapor_kullanicisi') {
-        <td>
-          <div class="d-flex justify-content-center">
-            <span
-              class="icon delete material-symbols-outlined"
-              (click)="deleteShelf(shelf.no)"
-              >delete</span
-            >
-          </div>
-        </td>
-        }
-      </tr>
-      } }
-    </tbody>
-  </table>
-</div> -->
 <div class="container">
   <div class="title-box">
     <h1>SHELF MANAGEMENT</h1>
   </div>
   <div class="d-flex justify-content-end gap-2 mt-4">
-    <input class="searchBox" (keyup)="filterChange($event)" type="text" />
-    <button class="btn btn-primary" (click)="addShelf()">Add Shelf +</button>
+    <input
+      class="searchBox"
+      (keyup)="filterChange($event)"
+      type="text"
+      placeholder="Search ..."
+    />
+    @if (role != 'rapor_kullanicisi') {
+    <button class="btn btn-success" (click)="addShelf()">NEW SHELF</button>
+    }
   </div>
   <table class="mt-4" matSort mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="no">
@@ -136,11 +74,12 @@
         Item
       </th>
       <td mat-cell *matCellDef="let shelf">
-        {{ shelf.itemName }}
+        {{ shelf.itemName | titlecase }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="actions">
+      @if (role !='rapor_kullanicisi') {
       <th class="fw-bolder fs-5" mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let shelf">
         <div>
@@ -166,6 +105,10 @@
           >
         </div>
       </td>
+      }@else {
+      <th class="fw-bolder fs-5" mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let shelf"></td>
+      }
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

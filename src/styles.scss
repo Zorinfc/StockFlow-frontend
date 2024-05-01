@@ -1,4 +1,96 @@
 /* You can add global styles to this file, and also import other style files */
+$edit-color: #E9C874;
+$delete-color: #A34343;
+$disabled-color :#808080 ;
+$report-color :#0B6623 ;
+$blue : #0d6efd;
+$plus-color: #00b436;
+$minus-color: #fc998c;
+
 
 html, body { height: 100%; }
 body { margin: 0; font-family:Poppins, Roboto, "Helvetica Neue", sans-serif; }
+
+.title-box {
+    padding: 2rem 1.5rem 0 1.5rem;
+    text-align: center;
+}
+
+.searchBox{
+    border: 1px solid $blue;
+    border-radius: 4px;
+    padding: 0.5rem;
+    &:focus{
+      outline: none;
+      box-shadow:0 0px 2px 1px rgba(0, 0, 0, 0.8) ;
+    }
+  }
+
+  .icon:hover{
+    cursor: pointer;
+    transform: scale(1.2);
+  }
+  .edit{
+    color: rgba($edit-color,1.0);
+    &:hover{
+      color: rgba($edit-color, 0.7);
+    }
+    
+  }
+  .delete{
+    color: rgba($delete-color,1.0);
+    &:hover{
+      color: rgba($delete-color, 0.7);
+    }
+  }
+  .plus{
+    color: rgba($plus-color,1.0);
+    &:hover{
+      color: rgba($plus-color, 0.7);
+    }
+  }
+  .minus{
+    color: rgba($minus-color,1.0);
+    &:hover{
+      color: rgba($minus-color, 0.7);
+    }
+  }
+  .report{
+    color: rgba($report-color,1.0);
+    &:hover{
+      color: rgba($report-color, 0.7);
+    }
+  }
+  .disable{
+    pointer-events: none;
+    color: rgba($disabled-color, 0.6);
+    }
+
+    .mt-4 * td{
+      font-size: 1rem;
+    }
+
+//////////////////////////
+
+      [data-bs-theme="blue"] {
+        --bs-body-color: white;
+        --bs-body-color-rgb: rgb(255, 255, 255);
+        --bs-body-bg: blue;
+        --bs-body-bg-rgb: rgb(125,142,31);
+        --bs-tertiary-bg:rgba(51, 147, 171, 0.727);
+      
+        .dropdown-menu {
+          --bs-dropdown-bg: rgb(3, 13, 55);
+          --bs-dropdown-link-active-bg: rgb(189, 54, 54);
+        }
+        .btn-primary {
+          --bs-btn-bg: gray;
+          --bs-btn-border-color: pink;
+          --bs-btn-hover-bg: $minus-color;
+          --bs-btn-hover-border-color: $edit-color;
+          --bs-btn-active-bg: orange;
+          --bs-btn-active-border-color: darkblue;
+          --bs-btn-focus-border-color: lightblue;
+          --bs-btn-focus-box-shadow: 0 0 0 .25rem rgba(255, 255, 255, .2);
+        }
+      }

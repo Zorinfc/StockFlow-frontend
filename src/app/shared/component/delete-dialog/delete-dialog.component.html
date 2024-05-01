@@ -1,16 +1,14 @@
-<div>
-  <mat-dialog-content> Are you sure you want to delete it? </mat-dialog-content>
-  <mat-dialog-actions class="d-flex justify-content-between">
-    <button (click)="yes()" class="btn btn-danger" mat-button mat-dialog-close>
-      Ok
-    </button>
+<div class="mx-4 my-4">
+  <p class="fs-6">Are you sure you want to delete it?</p>
+  <div class="d-grid gap-2" role="group" aria-label="Basic example">
+    <button type="button" (click)="yes()" class="btn btn-danger">Yes</button>
     <button
+      type="button"
       (click)="no()"
-      class="btn btn-warning"
-      mat-button
       [mat-dialog-close]="true"
+      class="btn btn-info"
     >
       No
     </button>
-  </mat-dialog-actions>
+  </div>
 </div>

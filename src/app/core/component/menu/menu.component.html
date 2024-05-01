@@ -64,7 +64,16 @@
         </li>
         }
       </ul>
-      <!-- justify-content-end align-items-center -->
+      <div class="form-check form-switch">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          role="switch"
+          id="flexSwitchCheckChecked"
+          [checked]="darkMode"
+          (click)="changeTheme()"
+        />
+      </div>
       <div class="dropdown dropstart">
         <button
           class="btn btn-success rounded-circle dropdown-toggle"
@@ -97,6 +106,4 @@
     </div>
   </div>
 </nav>
-<!-- 
-<button class="btn btn-primary"></button> -->
 <router-outlet />

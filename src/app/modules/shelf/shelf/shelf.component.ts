@@ -10,7 +10,6 @@ import { LoginService } from '../../../core/service/login/login.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { data } from 'jquery';
 
 @Component({
   selector: 'app-shelf',
@@ -40,7 +39,7 @@ export class ShelfComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
 
-  ngAfterViewInit() {}
+  // ngAfterViewInit() {}
 
   ngOnInit(): void {
     this.refreshShelves();
@@ -58,20 +57,19 @@ export class ShelfComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         this.shelves = data;
-        console.log(data);
       },
     });
   }
 
   edit(no: number) {
     let dialog = this.dialog.open(EditShelfComponent, {
-      width: '250px',
+      width: '300px',
       enterAnimationDuration: '250ms',
       exitAnimationDuration: '250ms',
     });
     dialog.afterClosed().subscribe({
       next: (response) => {
-        if (response != 0) {
+        if (response != 0 && response != undefined) {
           this.shelfService.editShelf(no, response).subscribe({
             next: (resp) => {
               if (resp.result != 0) {
@@ -90,7 +88,7 @@ export class ShelfComponent implements OnInit {
 
   deleteShelf(no: number): void {
     let dialog = this.dialog.open(DeleteDialogComponent, {
-      width: '250px',
+      width: '300px',
       enterAnimationDuration: '250ms',
       exitAnimationDuration: '250ms',
     });
@@ -125,7 +123,7 @@ export class ShelfComponent implements OnInit {
 
   addShelf() {
     let dialog = this.dialog.open(CreateShelfDialogComponent, {
-      width: '250px',
+      width: '300px',
       enterAnimationDuration: '250ms',
       exitAnimationDuration: '250ms',
     });

@@ -1,63 +1,99 @@
-<div
-  class="container d-flex flex-column justify-content-center align-items-center"
->
+<div class="container">
   <div class="title-box">
     <h1>ITEM MANAGEMENT</h1>
   </div>
+  <div class="d-flex justify-content-end gap-2 mt-4">
+    <input
+      class="searchBox"
+      (keyup)="filterChange($event)"
+      type="text"
+      placeholder="Search ..."
+    />
+    @if (role != 'rapor_kullanicisi') {
+    <button class="btn btn-success" (click)="newItem()">NEW ITEM</button>
+    }
+  </div>
 
-  <!-- <a class="btn btn-primary btn-nueva"><b>+</b> Add Shelf </a> -->
-  <button class="btn btn-primary mb-3" (click)="newItem()">NEW ITEM</button>
-  <table class="table table-bordered table-hover">
-    <thead>
-      <tr>
-        <th>Item Name</th>
-        <th>Minimum Quantity</th>
-        <th>Total</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (item of items; track $index) {
+  <table class="mt-4" matSort mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="name">
+      <th
+        class="fw-bolder fs-5"
+        mat-sort-header
+        mat-header-cell
+        *matHeaderCellDef
+      >
+        Name
+      </th>
+      <td mat-cell *matCellDef="let item">{{ item.name | titlecase }}</td>
+    </ng-container>
 
-      <tr>
-        <td>{{ item.name }}</td>
-        <td>{{ item.min_quantity }}</td>
-        <td>{{ item.total }}</td>
+    <ng-container matColumnDef="min_quantity">
+      <th
+        class="fw-bolder fs-5"
+        mat-sort-header
+        mat-header-cell
+        *matHeaderCellDef
+      >
+        Min Quantity
+      </th>
+      <td mat-cell *matCellDef="let item">{{ item.min_quantity }}</td>
+    </ng-container>
 
-        <td>
-          @if(role != 'rapor_kullanicisi'){
-          <div class="d-flex justify-content-center">
-            <span
-              class="icon plus material-symbols-outlined"
-              (click)="itemAdd(item.name)"
-            >
-              add
-            </span>
-            <span
-              class="icon minus material-symbols-outlined"
-              (click)="itemRemove(item.name)"
-            >
-              remove
-            </span>
-            <span
-              class="icon delete material-symbols-outlined"
-              (click)="delete(item.name)"
-              >delete</span
-            >
-          </div>
-          }@else {
-          <div class="d-flex justify-content-center">
-            <span
-              class="icon material-symbols-outlined"
-              (click)="createReport(item.name)"
-            >
-              report
-            </span>
-          </div>
-          }
-        </td>
-      </tr>
-      }
-    </tbody>
+    <ng-container matColumnDef="total">
+      <th
+        class="fw-bolder fs-5"
+        mat-sort-header
+        mat-header-cell
+        *matHeaderCellDef
+      >
+        Total
+      </th>
+      <td mat-cell *matCellDef="let item">{{ item.total }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th class="fw-bolder fs-5" mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let item">
+        @if(role != 'rapor_kullanicisi'){
+        <div>
+          <span
+            class="icon plus material-symbols-outlined"
+            (click)="itemAdd(item.name)"
+          >
+            add
+          </span>
+          <span
+            class="icon minus material-symbols-outlined"
+            (click)="itemRemove(item.name)"
+          >
+            remove
+          </span>
+          <span
+            class="icon delete material-symbols-outlined"
+            (click)="delete(item.name)"
+            >delete</span
+          >
+        </div>
+        }@else {
+        <div>
+          <span
+            class="icon report material-symbols-outlined"
+            (click)="createReport(item.name)"
+          >
+            report
+          </span>
+        </div>
+        }
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
+
+  <mat-paginator
+    showFirstLastButtons
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 20]"
+  ></mat-paginator>
 </div>

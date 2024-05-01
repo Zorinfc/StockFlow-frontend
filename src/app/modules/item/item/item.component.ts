@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Item } from '../dto/item';
 import { ItemService } from '../../service/item/item.service';
 import { ToastrService } from 'ngx-toastr';
@@ -12,6 +12,9 @@ import { LoginService } from '../../../core/service/login/login.service';
 import { CreateReportDialogComponent } from '../../../shared/component/create-report-dialog/create-report-dialog.component';
 import { HomeService } from '../../service/home/home.service';
 import { CreateReportDTO } from '../../../shared/dto/createReportDTO';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-item',
@@ -38,6 +41,17 @@ export class ItemComponent implements OnInit {
     private homeService: HomeService
   ) {}
 
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort!: MatSort;
+
+  dataSource: any;
+  displayedColumns: string[] = ['name', 'min_quantity', 'total', 'actions'];
+
+  filterChange(data: Event) {
+    const value = (data.target as HTMLInputElement).value;
+    this.dataSource.filter = value;
+  }
+
   ngOnInit(): void {
     this.refreshItems();
   }
@@ -45,6 +59,9 @@ export class ItemComponent implements OnInit {
   refreshItems() {
     this.itemService.getItems().subscribe({
       next: (data) => {
+        this.dataSource = new MatTableDataSource<Item>(data);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
         this.items = data;
       },
     });
@@ -52,7 +69,7 @@ export class ItemComponent implements OnInit {
 
   newItem(): void {
     let dialog = this.dialog.open(CreateItemDialogComponent, {
-      width: '250px',
+      width: '300px',
       enterAnimationDuration: '250ms',
       exitAnimationDuration: '250ms',
     });
@@ -82,7 +99,7 @@ export class ItemComponent implements OnInit {
 
   delete(name: string) {
     let dialog = this.dialog.open(DeleteDialogComponent, {
-      width: '250px',
+      width: '300px',
       enterAnimationDuration: '250ms',
       exitAnimationDuration: '250ms',
     });
@@ -117,11 +134,11 @@ export class ItemComponent implements OnInit {
 
   itemAdd(name: string) {
     let dialog = this.dialog.open(ItemInOutDialogComponent, {
-      width: '250px',
+      width: '300px',
       enterAnimationDuration: '250ms',
       exitAnimationDuration: '250ms',
     });
-    dialog.componentInstance.question = 'How many do you want to add :';
+    dialog.componentInstance.question = 'How many do you want to add';
     dialog.componentInstance.buttonName = 'Add Item';
     dialog.afterClosed().subscribe({
       next: (response) => {
@@ -155,11 +172,11 @@ export class ItemComponent implements OnInit {
 
   itemRemove(name: string) {
     let dialog = this.dialog.open(ItemInOutDialogComponent, {
-      width: '250px',
+      width: '300px',
       enterAnimationDuration: '250ms',
       exitAnimationDuration: '250ms',
     });
-    dialog.componentInstance.question = 'How many do you want to remove :';
+    dialog.componentInstance.question = 'How many do you want to remove';
     dialog.componentInstance.buttonName = 'Remove Item';
     dialog.afterClosed().subscribe({
       next: (response) => {
@@ -193,7 +210,7 @@ export class ItemComponent implements OnInit {
 
   createReport(name: string) {
     let dialog = this.dialog.open(CreateReportDialogComponent, {
-      width: '250px',
+      width: '300px',
       enterAnimationDuration: '250ms',
       exitAnimationDuration: '250ms',
       data: {

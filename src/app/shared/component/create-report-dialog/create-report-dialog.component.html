@@ -1,31 +1,41 @@
-<div
-  class="d-flex justify-content-center align-items-center flex-column mx-4 my-4"
->
+<div class="mx-4 my-4">
   <form [formGroup]="reportForm">
-    <label for="email">Email : </label>
-    <input
-      class="mt-2"
-      type="text"
-      name="email"
-      formControlName="userEmail"
-      id="email"
-    />
-    <label for="itemName">itemName : </label>
-    <input
-      class="mt-2"
-      type="text"
-      name="itemName"
-      formControlName="itemName"
-      id="itemName"
-    />
-    <label for="description">description : </label>
-    <input
-      class="mt-2"
-      type="text"
-      name="description"
-      formControlName="description"
-      id="description"
-    />
+    <div class="mb-3">
+      <label for="email" class="form-label">Email : </label>
+      <input
+        class="mt-2 form-control"
+        type="text"
+        name="email"
+        formControlName="userEmail"
+        id="email"
+        readonly
+      />
+    </div>
+    <div class="mb-3">
+      <label for="itemName" class="form-label">Item : </label>
+      <input
+        class="mt-2 form-control"
+        type="text"
+        name="itemName"
+        formControlName="itemName"
+        id="itemName"
+        readonly
+      />
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description : </label>
+      <input
+        class="mt-2 form-control"
+        type="text"
+        name="description"
+        formControlName="description"
+        id="description"
+      />
+    </div>
+    <div class="d-grid">
+      <button class="btn btn-success mt-2" (click)="yes()">
+        Create Report
+      </button>
+    </div>
   </form>
-  <button class="btn btn-primary mt-2" (click)="yes()">Create Report</button>
 </div>

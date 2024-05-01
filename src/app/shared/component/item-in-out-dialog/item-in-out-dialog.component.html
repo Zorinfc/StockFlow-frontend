@@ -1,17 +1,25 @@
-<div
-  class="mx-4 my-4 d-flex justify-content-start align-items-start flex-column"
->
-  <label> {{ question }} </label>
+<div class="mx-4 my-4">
   <div class="mt-2">
+    <label for="quantity" class="form-label"> {{ question }} </label>
     <input
+      class="form-control"
+      id="quantity"
       type="number"
-      max="10"
+      max="999"
       min="1"
       placeholder="1"
       [(ngModel)]="quantity"
     />
   </div>
-  <button class="btn btn-info mt-2" (click)="itemInOut()">
-    {{ buttonName }}
-  </button>
+  <div class="d-grid">
+    @if (buttonName == 'Add Item') {
+    <button class="btn btn-success mt-2" (click)="itemInOut()">
+      {{ buttonName }}
+    </button>
+    }@else {
+    <button class="btn btn-danger mt-2" (click)="itemInOut()">
+      {{ buttonName }}
+    </button>
+    }
+  </div>
 </div>

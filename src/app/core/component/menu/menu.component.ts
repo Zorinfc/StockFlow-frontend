@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from '../../service/login/login.service';
 import { UserService } from '../../../modules/service/user/user.service';
+import { Toast } from 'ngx-toastr';
 
 @Component({
   selector: 'app-menu',
@@ -10,6 +11,8 @@ import { UserService } from '../../../modules/service/user/user.service';
 })
 export class MenuComponent implements OnInit {
   role = '';
+  darkMode: boolean = true;
+  myTheme: string = 'light';
   constructor(
     public route: ActivatedRoute,
     private loginService: LoginService,
@@ -36,5 +39,12 @@ export class MenuComponent implements OnInit {
 
     return str;
   }
+
+  changeTheme() {
+    if (this.myTheme === 'light') {
+      this.myTheme = 'dark';
+    } else {
+      this.myTheme = 'light';
+    }
+  }
 }
-// SAYFA YENİLENİNCE ROL GİDİYOR !!! TEKRAR BAKILACAK

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from '../dto/user';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
@@ -8,6 +8,9 @@ import { AddUserComponent } from '../../../shared/component/add-user/add-user.co
 import { UserDTO } from '../../../shared/dto/userDTO';
 import { SuccessDialogComponent } from '../../../shared/component/success-dialog/success-dialog.component';
 import { UpdateUserComponent } from '../../../shared/component/update-user/update-user.component';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-user',
@@ -24,6 +27,22 @@ export class UserComponent implements OnInit {
     public dialog: MatDialog
   ) {}
 
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort!: MatSort;
+  dataSource: any;
+  displayedColumns: string[] = [
+    'email',
+    'name',
+    'lastName',
+    'roleName',
+    'actions',
+  ];
+
+  filterChange(data: Event) {
+    const value = (data.target as HTMLInputElement).value;
+    this.dataSource.filter = value;
+  }
+
   ngOnInit(): void {
     this.refreshTable();
   }
@@ -31,6 +50,9 @@ export class UserComponent implements OnInit {
   refreshTable() {
     this.userService.getUsers().subscribe({
       next: (data) => {
+        this.dataSource = new MatTableDataSource<User>(data);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
         this.users = data;
       },
     });
@@ -38,7 +60,7 @@ export class UserComponent implements OnInit {
 
   passwordDialog(pw: string) {
     let dialog = this.dialog.open(SuccessDialogComponent, {
-      width: '250px',
+      width: '300px',
       enterAnimationDuration: '250ms',
       exitAnimationDuration: '250ms',
     });
@@ -47,7 +69,7 @@ export class UserComponent implements OnInit {
 
   addEmployee() {
     let dialog = this.dialog.open(AddUserComponent, {
-      width: '250px',
+      width: '300px',
       enterAnimationDuration: '250ms',
       exitAnimationDuration: '250ms',
     });
@@ -92,7 +114,7 @@ export class UserComponent implements OnInit {
   }
   delete(email: string) {
     let dialog = this.dialog.open(DeleteDialogComponent, {
-      width: '250px',
+      width: '300px',
       enterAnimationDuration: '250ms',
       exitAnimationDuration: '250ms',
     });
@@ -124,7 +146,7 @@ export class UserComponent implements OnInit {
     this.userService.getUser(email).subscribe({
       next: (resp) => {
         let dialog = this.dialog.open(UpdateUserComponent, {
-          width: '250px',
+          width: '300px',
           enterAnimationDuration: '250ms',
           exitAnimationDuration: '250ms',
           data: {
@@ -148,6 +170,9 @@ export class UserComponent implements OnInit {
                 this.userService.updateUser(this.dto).subscribe({
                   next: (resp) => {
                     this.refreshTable();
+                    this.toastr.info('User Updated', 'User System', {
+                      timeOut: 2000,
+                    });
                   },
                 });
               }
@@ -160,6 +185,9 @@ export class UserComponent implements OnInit {
                 this.userService.updateUser(this.dto).subscribe({
                   next: (resp) => {
                     this.refreshTable();
+                    this.toastr.info('User Updated', 'User System', {
+                      timeOut: 2000,
+                    });
                   },
                 });
               }

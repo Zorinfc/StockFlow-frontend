@@ -1,9 +1,10 @@
-<div>
-  <div
-    class="mx-4 my-4 d-flex justify-content-start align-items-start flex-column"
-  >
-    <label for="quantity">How many do you want to remove ?</label>
+<div class="mx-4 my-4">
+  <div class="mb-3">
+    <label class="form-label" for="quantity">
+      How many do you want to remove ?
+    </label>
     <input
+      class="mt-2 form-control"
       type="number"
       name="quantity"
       id="quantity"
@@ -11,8 +12,9 @@
       min="0"
       [(ngModel)]="quantity"
     />
-    <div class="btn btn-danger col-6 mx-auto" (click)="closeDialog()">
-      Remove
-    </div>
+  </div>
+
+  <div class="d-grid">
+    <button class="btn btn-danger" (click)="closeDialog()">Remove</button>
   </div>
 </div>

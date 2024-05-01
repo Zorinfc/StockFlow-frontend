@@ -1,9 +1,20 @@
-<div class="mx-4 my-4 d-grid">
-  <div><label for=""> Shelves to create : </label></div>
-  <div class="mt-2">
-    <input type="number" max="10" min="1" placeholder="1" [(ngModel)]="count" />
+<div class="mx-4 my-4">
+  <div class="mb-3">
+    <label class="form-label" for="count">Shelves to create :</label>
+    <input
+      id="count"
+      class="mt-2 form-control"
+      type="number"
+      max="50"
+      min="1"
+      placeholder="1"
+      [(ngModel)]="count"
+      aria-describedby="inputHelp"
+    />
+    <small id="inputHelp" class="form-text text-muted">Max shelf = 50</small>
   </div>
-  <div>
-    <button class="btn btn-info mt-2" (click)="addShelf()">Add shelf</button>
+
+  <div class="d-grid">
+    <button class="btn btn-success" (click)="addShelf()">Add shelf</button>
   </div>
 </div>
