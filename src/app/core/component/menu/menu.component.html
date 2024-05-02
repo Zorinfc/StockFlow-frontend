@@ -103,18 +103,7 @@ m-238 -5 c0 -23 4 -30 20 -30 16 0 20 7 20 30 0 28 2 30 40 30 l40 0 0 -100 0
         </li>
         }
       </ul>
-      <div class="form-check form-switch">
-        <input
-          class="form-check-input"
-          type="checkbox"
-          role="switch"
-          id="flexSwitchCheckChecked"
-          (click)="changeTheme()"
-        />
-        <!-- <button class="btn btn-outline-warning" (click)="test()">
-          Click me
-        </button> -->
-      </div>
+
       <div class="dropdown dropstart">
         <button
           class="btn btn-success rounded-circle dropdown-toggle"
@@ -124,23 +113,31 @@ m-238 -5 c0 -23 4 -30 20 -30 16 0 20 7 20 30 0 28 2 30 40 30 l40 0 0 -100 0
         >
           {{ getChar() | uppercase }}
         </button>
-        <ul class="dropdown-menu" style="background-color: #1c2841">
+        <ul class="dropdown-menu">
           <li>
             <a
-              class="dropdown-item text-light"
+              class="dropdown-item"
               routerLinkActive="active"
               [routerLink]="['./profile']"
               [relativeTo]="route"
               >Profile</a
             >
           </li>
+          <li class="d-flex justify-content-between px-3">
+            <label for="themeSwitch">Theme</label>
+            <div class="form-check form-switch">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                role="switch"
+                id="themeSwitch"
+                (click)="changeTheme()"
+              />
+            </div>
+          </li>
+          <li><hr class="dropdown-divider" /></li>
           <li class="mt-1">
-            <a
-              class="dropdown-item text-danger"
-              (click)="logout()"
-              style="cursor: pointer"
-              >Logout</a
-            >
+            <a class="dropdown-item" (click)="logout()">Logout</a>
           </li>
         </ul>
       </div>

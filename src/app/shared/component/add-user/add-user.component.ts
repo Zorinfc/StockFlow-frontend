@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-add-user',
@@ -12,7 +17,6 @@ export class AddUserComponent {
     public dialogRef: MatDialogRef<AddUserComponent>,
     private formBuilder: FormBuilder
   ) {}
-
   addUser() {
     this.dialogRef.close({
       object: this.userForm,
@@ -21,9 +25,9 @@ export class AddUserComponent {
   }
 
   userForm = this.formBuilder.nonNullable.group({
-    name: [''],
-    lastName: [''],
-    email: [''],
-    role: [2],
+    name: ['', [Validators.required, Validators.pattern(/[\S]/)]],
+    lastName: ['', [Validators.required, Validators.pattern(/[\S]/)]],
+    email: ['', [Validators.required, Validators.pattern(/[\S]/)]],
+    role: [2, [Validators.required, Validators.pattern(/[\S]/)]],
   });
 }

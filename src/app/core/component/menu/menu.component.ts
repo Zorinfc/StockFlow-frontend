@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from '../../service/login/login.service';
-import { MatDialog } from '@angular/material/dialog';
-import { SuccessDialogComponent } from '../../../shared/component/success-dialog/success-dialog.component';
 
 @Component({
   selector: 'app-menu',
@@ -15,8 +13,7 @@ export class MenuComponent implements OnInit {
   constructor(
     public route: ActivatedRoute,
     private loginService: LoginService,
-    private router: Router,
-    private dialog: MatDialog
+    private router: Router
   ) {}
   ngOnInit(): void {
     this.role = this.loginService.getRole();
@@ -27,24 +24,7 @@ export class MenuComponent implements OnInit {
     body.setAttribute('data-bs-theme', currentTheme);
   }
 
-  // test() {
-  //   let dialog = this.dialog.open(SuccessDialogComponent, {
-  //     width: '350px',
-  //     enterAnimationDuration: '250ms',
-  //     exitAnimationDuration: '250ms',
-  //     backdropClass: 'blurBackGround',
-  //   });
-  //   dialog.componentInstance.password = 'boş string';
-
-  //   dialog.afterClosed().subscribe({
-  //     next: (resp) => {
-  //       //console.log(resp);
-  //     },
-  //   });
-  // }
-
   logout() {
-    // this.service.cleareRole();
     this.loginService.logout();
     this.router.navigate(['/login']);
   }

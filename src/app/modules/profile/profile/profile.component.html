@@ -1,15 +1,10 @@
-<div
-  class="container w-25 mt-5 grid bg-dark rounded border border-danger"
-  id="newPassword"
->
+<div class="container w-50 mt-5 grid rounded profile" id="newPassword">
   <form class="mb-3 pb-2" [formGroup]="userForm">
     <div class="mb-3 mt-2">
-      <label for="email" class="form-label text-light disable"
-        >Email address</label
-      >
+      <label for="email" class="form-label mt-3">Email address</label>
       <input
         type="email"
-        class="form-control email"
+        class="form-control email disable"
         name="email"
         id="email"
         formControlName="email"
@@ -17,7 +12,7 @@
       />
     </div>
     <div class="mb-3">
-      <label for="role" class="form-label text-light">Role</label>
+      <label for="role" class="form-label">Role</label>
       <input
         type="text"
         class="form-control disable"
@@ -28,9 +23,7 @@
       />
     </div>
     <div class="mb-3">
-      <label for="oldPassword" class="form-label text-light"
-        >Old Password</label
-      >
+      <label for="oldPassword" class="form-label">Old Password</label>
       <input
         type="text"
         class="form-control"
@@ -40,9 +33,7 @@
       />
     </div>
     <div class="mb-3">
-      <label for="newPassword" class="form-label text-light"
-        >New Password</label
-      >
+      <label for="newPassword" class="form-label">New Password</label>
       <input
         type="text"
         class="form-control"
@@ -50,30 +41,9 @@
         id="newPassword"
         formControlName="newPassword"
       />
-      <!-- VALIDATOR -->
-
-      <ul class="mt-2">
-        <li *ngIf="userForm.errors?.['mismatch']" class="text-light">
-          Passwords must match
-        </li>
-        <li *ngIf="userForm.errors?.['letter']" class="text-light">
-          Password must contain at least 1 lowercase character
-        </li>
-        <li *ngIf="userForm.errors?.['digit']" class="text-light">
-          Password must contain at least 1 digit
-        </li>
-        <li *ngIf="userForm.errors?.['letterBig']" class="text-light">
-          Password must contain at least 1 uppercase character
-        </li>
-        <li *ngIf="userForm.errors?.['minLength']" class="text-light">
-          The password must consist of at least 8 characters
-        </li>
-      </ul>
-
-      <!-- VALIDATOR -->
     </div>
     <div class="mb-3">
-      <label for="newPasswordControl" class="form-label text-light"
+      <label for="newPasswordControl" class="form-label"
         >New Password Again</label
       >
       <input
@@ -84,7 +54,92 @@
         formControlName="newPasswordControl"
       />
     </div>
-    <div class="mb-3 d-grid gap-1 mx-auto">
+    <!-- VALIDATOR -->
+
+    <ol class="mt-2" style="list-style-type: square">
+      <li class="text-light d-flex align-items-center">
+        Passwords must match
+        <span
+          *ngIf="userForm.errors?.['mismatch']"
+          class="material-symbols-outlined red ms-1"
+        >
+          close
+        </span>
+        <span
+          *ngIf="!userForm.errors?.['mismatch']"
+          class="material-symbols-outlined green ms-1"
+        >
+          check
+        </span>
+      </li>
+
+      <li class="text-light d-flex align-items-center">
+        Password must contain at least 1 lowercase character
+        <span
+          *ngIf="userForm.errors?.['letter']"
+          class="material-symbols-outlined red ms-1"
+        >
+          close
+        </span>
+        <span
+          *ngIf="!userForm.errors?.['letter']"
+          class="material-symbols-outlined green ms-1"
+        >
+          check
+        </span>
+      </li>
+
+      <li class="text-light d-flex align-items-center">
+        Password must contain at least 1 digit
+        <span
+          *ngIf="userForm.errors?.['digit']"
+          class="material-symbols-outlined red ms-1"
+        >
+          close
+        </span>
+        <span
+          *ngIf="!userForm.errors?.['digit']"
+          class="material-symbols-outlined green ms-1"
+        >
+          check
+        </span>
+      </li>
+
+      <li class="text-light d-flex align-items-center">
+        Password must contain at least 1 uppercase character
+        <span
+          *ngIf="userForm.errors?.['letterBig']"
+          class="material-symbols-outlined red ms-1"
+        >
+          close
+        </span>
+        <span
+          *ngIf="!userForm.errors?.['letterBig']"
+          class="material-symbols-outlined green ms-1"
+        >
+          check
+        </span>
+      </li>
+
+      <li class="text-light d-flex align-items-center">
+        The password must consist of at least 8 characters
+        <span
+          *ngIf="userForm.errors?.['minLength']"
+          class="material-symbols-outlined red ms-1"
+        >
+          close
+        </span>
+        <span
+          *ngIf="!userForm.errors?.['minLength']"
+          class="material-symbols-outlined green ms-1"
+        >
+          check
+        </span>
+      </li>
+    </ol>
+
+    <!-- VALIDATOR -->
+    <div class="d-grid gap-2 mb-2">
       <button
         type="button"
         class="btn btn-success"

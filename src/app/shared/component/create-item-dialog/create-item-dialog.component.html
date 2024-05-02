@@ -1,32 +1,39 @@
-<div class="mx-4 my-4">
-  <div class="mb-3">
-    <label class="form-label" for="name">Item Name : </label>
-    <input class="mt-2 form-control" type="text" [(ngModel)]="name" id="name" />
-  </div>
+<div class="dialog">
+  <div class="mx-4 my-4">
+    <div class="mb-3">
+      <label class="form-label" for="name">Item Name : </label>
+      <input
+        class="mt-2 form-control"
+        type="text"
+        [(ngModel)]="name"
+        id="name"
+      />
+    </div>
 
-  <div class="mb-3">
-    <label class="form-label" for="quantity">Item Quantity : </label>
-    <input
-      class="mt-2 form-control"
-      type="number"
-      [(ngModel)]="quantity"
-      id="quantity"
-    />
-  </div>
-  <div class="mb-3">
-    <label class="form-label" for="min_quantity">Minimum Quantity : </label>
-    <input
-      class="mt-2 form-control"
-      type="number"
-      [(ngModel)]="min_quantity"
-      id="min_quantity"
-      min="0"
-      max="100"
-    />
-  </div>
-  <div class="d-grid">
-    <button class="btn btn-success mt-2" (click)="createItem()">
-      New Item
-    </button>
+    <div class="mb-3">
+      <label class="form-label" for="quantity">Item Quantity : </label>
+      <input
+        class="mt-2 form-control"
+        type="number"
+        [(ngModel)]="quantity"
+        id="quantity"
+      />
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="min_quantity">Minimum Quantity : </label>
+      <input
+        class="mt-2 form-control"
+        type="number"
+        [(ngModel)]="min_quantity"
+        id="min_quantity"
+        min="0"
+        max="100"
+      />
+    </div>
+    <div class="d-grid">
+      <button class="btn btn-success mt-2" (click)="createItem()">
+        New Item
+      </button>
+    </div>
   </div>
 </div>

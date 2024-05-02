@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../service/user/user.service';
 import { ToastrService } from 'ngx-toastr';
-import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 import { LoginService } from '../../../core/service/login/login.service';
 import { UserPassword } from '../dto/userPassword';
 
@@ -26,7 +31,14 @@ export class ProfileComponent implements OnInit {
       email: [''],
       role: [''],
       oldPassword: ['', Validators.required],
-      newPassword: ['', [Validators.minLength(8), Validators.required]],
+      newPassword: [
+        '',
+        [
+          Validators.minLength(8),
+          Validators.required,
+          Validators.pattern(/[\S]/),
+        ],
+      ],
       newPasswordControl: ['', [Validators.minLength(8), Validators.required]],
     },
     {
@@ -35,19 +47,37 @@ export class ProfileComponent implements OnInit {
         this.pwDigit,
         this.pwLetter,
         this.pwBigLetter,
-        this.passwordMatchValidator,
+        this.combinedValidator,
       ],
     }
   );
 
   // Validators
 
-  passwordMatchValidator(control: AbstractControl) {
-    return control.get('newPassword')?.value ===
-      control.get('newPasswordControl')?.value
+  combinedValidator(control: AbstractControl) {
+    const newPassword = control.get('newPassword')?.value;
+    const newPasswordControl = control.get('newPasswordControl')?.value;
+
+    // Boşluk kontrolü
+    const hasWhitespace = (value: string) => (value || '').trim().length === 0;
+
+    // Şifre eşleşme kontrolü
+    const passwordsMatch = newPassword === newPasswordControl;
+
+    return passwordsMatch && !hasWhitespace(newPassword) && passwordsMatch
       ? null
       : { mismatch: true };
   }
+
+  // passwordMatchValidator(control: AbstractControl) {
+  //   return control.get('newPassword')?.value ===
+  //     control.get('newPasswordControl')?.value
+  //     ? null
+  //     : { mismatch: true };
+  // }
+  // public noWhitespaceValidator(control: FormControl) {
+  //   return (control.value || '').trim().length ? null : { whitespace: true };
+  // }
 
   pwLength(control: AbstractControl) {
     let password = control.get('newPassword')?.value;

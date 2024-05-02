@@ -3,7 +3,12 @@
     <h1>EMPLOYEE MANAGEMENT</h1>
   </div>
   <div class="d-flex justify-content-end gap-2 mt-4">
-    <input class="searchBox" (keyup)="filterChange($event)" type="text" />
+    <input
+      class="searchBox"
+      (keyup)="filterChange($event)"
+      type="text"
+      placeholder="Search ..."
+    />
     <button class="btn btn-success" (click)="addEmployee()">
       NEW EMPLOYEE
     </button>
