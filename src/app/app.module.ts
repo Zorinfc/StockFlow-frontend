@@ -27,6 +27,7 @@ import { DataTablesModule } from 'angular-datatables';
 import { urlInterceptor } from './core/interceptor/url.interceptor';
 import { APP_CONFIG } from './app.config';
 import { environment } from '../environments/environment.development';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +52,7 @@ import { environment } from '../environments/environment.development';
     MatSortModule,
     MatPaginatorModule,
     DataTablesModule,
+    ClipboardModule,
   ],
   exports: [MatPaginatorModule, MatSortModule],
   providers: [

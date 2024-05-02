@@ -80,6 +80,7 @@ export class ReportComponent implements OnInit {
       width: '300px',
       enterAnimationDuration: '250ms',
       exitAnimationDuration: '250ms',
+      backdropClass: 'blurBackGround',
     });
 
     dialog.afterClosed().subscribe({

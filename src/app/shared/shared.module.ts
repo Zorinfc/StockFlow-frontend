@@ -12,6 +12,7 @@ import { SuccessDialogComponent } from './component/success-dialog/success-dialo
 import { UpdateUserComponent } from './component/update-user/update-user.component';
 import { EditShelfComponent } from './component/edit-shelf/edit-shelf.component';
 import { CreateReportDialogComponent } from './component/create-report-dialog/create-report-dialog.component';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { CreateReportDialogComponent } from './component/create-report-dialog/cr
     MatDialogModule,
     MatIconModule,
     ReactiveFormsModule,
+    ClipboardModule,
   ],
 })
 export class SharedModule {}

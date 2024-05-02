@@ -72,6 +72,7 @@ export class ItemComponent implements OnInit {
       width: '300px',
       enterAnimationDuration: '250ms',
       exitAnimationDuration: '250ms',
+      backdropClass: 'blurBackGround',
     });
 
     dialog.afterClosed().subscribe({
@@ -102,6 +103,7 @@ export class ItemComponent implements OnInit {
       width: '300px',
       enterAnimationDuration: '250ms',
       exitAnimationDuration: '250ms',
+      backdropClass: 'blurBackGround',
     });
 
     dialog.afterClosed().subscribe({
@@ -137,6 +139,7 @@ export class ItemComponent implements OnInit {
       width: '300px',
       enterAnimationDuration: '250ms',
       exitAnimationDuration: '250ms',
+      backdropClass: 'blurBackGround',
     });
     dialog.componentInstance.question = 'How many do you want to add';
     dialog.componentInstance.buttonName = 'Add Item';
@@ -175,6 +178,7 @@ export class ItemComponent implements OnInit {
       width: '300px',
       enterAnimationDuration: '250ms',
       exitAnimationDuration: '250ms',
+      backdropClass: 'blurBackGround',
     });
     dialog.componentInstance.question = 'How many do you want to remove';
     dialog.componentInstance.buttonName = 'Remove Item';
@@ -213,6 +217,7 @@ export class ItemComponent implements OnInit {
       width: '300px',
       enterAnimationDuration: '250ms',
       exitAnimationDuration: '250ms',
+      backdropClass: 'blurBackGround',
       data: {
         userEmail: localStorage.getItem('email'),
         itemName: name,

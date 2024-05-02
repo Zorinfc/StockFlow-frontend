@@ -60,9 +60,10 @@ export class UserComponent implements OnInit {
 
   passwordDialog(pw: string) {
     let dialog = this.dialog.open(SuccessDialogComponent, {
-      width: '300px',
+      width: '450px',
       enterAnimationDuration: '250ms',
       exitAnimationDuration: '250ms',
+      backdropClass: 'blurBackGround',
     });
     dialog.componentInstance.password = pw;
   }
@@ -72,6 +73,7 @@ export class UserComponent implements OnInit {
       width: '300px',
       enterAnimationDuration: '250ms',
       exitAnimationDuration: '250ms',
+      backdropClass: 'blurBackGround',
     });
     dialog.afterClosed().subscribe({
       next: (response) => {
@@ -117,6 +119,7 @@ export class UserComponent implements OnInit {
       width: '300px',
       enterAnimationDuration: '250ms',
       exitAnimationDuration: '250ms',
+      backdropClass: 'blurBackGround',
     });
 
     dialog.afterClosed().subscribe({
@@ -149,6 +152,7 @@ export class UserComponent implements OnInit {
           width: '300px',
           enterAnimationDuration: '250ms',
           exitAnimationDuration: '250ms',
+          backdropClass: 'blurBackGround',
           data: {
             name: resp.name,
             lastName: resp.lastName,

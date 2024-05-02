@@ -66,6 +66,7 @@ export class ShelfComponent implements OnInit {
       width: '300px',
       enterAnimationDuration: '250ms',
       exitAnimationDuration: '250ms',
+      backdropClass: 'blurBackGround',
     });
     dialog.afterClosed().subscribe({
       next: (response) => {
@@ -91,6 +92,7 @@ export class ShelfComponent implements OnInit {
       width: '300px',
       enterAnimationDuration: '250ms',
       exitAnimationDuration: '250ms',
+      backdropClass: 'blurBackGround',
     });
 
     dialog.afterClosed().subscribe({
@@ -126,6 +128,7 @@ export class ShelfComponent implements OnInit {
       width: '300px',
       enterAnimationDuration: '250ms',
       exitAnimationDuration: '250ms',
+      backdropClass: 'blurBackGround',
     });
 
     dialog.afterClosed().subscribe({

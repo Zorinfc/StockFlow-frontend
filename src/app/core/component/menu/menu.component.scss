@@ -6,7 +6,14 @@
   .navbar {
     border-bottom: 5px solid #1B3856;
   }
-  
+  $test-color: #9EC8B9;
+  $test2:#1B4242;
+  $color1:#94C4D8;
+  $color2:#1B3856;
+
+  .navbar{
+    background-color: $test2;
+  }
   .navbar .navbar-nav .nav-link.active {
     background-color: #1B3856;
     color: #fff;
@@ -20,6 +27,10 @@
     .navbar-nav {
       padding-top: 0.5em;
     }
+  }
+  
+  #logo{
+    margin-right: 1rem;
   }
 
   // dropdown ▼ kaldırma

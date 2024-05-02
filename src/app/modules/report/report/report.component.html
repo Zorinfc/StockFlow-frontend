@@ -1,67 +1,3 @@
-<!-- <div
-  class="container d-flex flex-column justify-content-center align-items-center mt-5"
->
-  <div class="title-box mb-3">
-    <h1>REPORT MANAGEMENT</h1>
-  </div>
-  <table class="table table-bordered table-hover">
-    <thead>
-      <tr>
-        <th>Email</th>
-        <th>Full Name</th>
-        <th>Description</th>
-        <th>Item</th>
-        <th>Status</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (report of reports; track $index) {
-      <tr>
-        <td>{{ report.userEmail }}</td>
-        <td>{{ report.userName }} {{ report.userLastName }}</td>
-        <td>{{ report.description }}</td>
-        <td>{{ report.itemName }}</td>
-        @if (report.active == true) {
-        <td>Active</td>
-        }@else {
-        <td>Inactive</td>
-        }
-        <td>
-          <div class="d-flex justify-content-center">
-            <div class="form-check form-switch">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                role="switch"
-                id="flexSwitchCheckChecked"
-                [checked]="report.active"
-                (click)="openCloseReport(report.id, report.active)"
-              />
-            </div>
-            @if (report.active == false) {
-            <span
-              class="icon delete material-symbols-outlined"
-              (click)="deleteReport(report.id)"
-            >
-              delete
-            </span>
-            }@else {
-            <span
-              class="icon delete disable material-symbols-outlined"
-              (click)="deleteReport(report.id)"
-            >
-              delete
-            </span>
-            }
-          </div>
-        </td>
-      </tr>
-      }
-    </tbody>
-  </table>
-</div> -->
-
 <div class="container">
   <div class="title-box">
     <h1>REPORT MANAGEMENT</h1>
@@ -75,7 +11,12 @@
     />
   </div>
 
-  <table class="mt-4" matSort mat-table [dataSource]="dataSource">
+  <table
+    class="table table-hover table-striped mt-4"
+    matSort
+    mat-table
+    [dataSource]="dataSource"
+  >
     <ng-container matColumnDef="userEmail">
       <th
         class="fw-bolder fs-5"

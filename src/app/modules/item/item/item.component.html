@@ -14,7 +14,12 @@
     }
   </div>
 
-  <table class="mt-4" matSort mat-table [dataSource]="dataSource">
+  <table
+    class="table tablo-hover table-striped mt-4"
+    matSort
+    mat-table
+    [dataSource]="dataSource"
+  >
     <ng-container matColumnDef="name">
       <th
         class="fw-bolder fs-5"

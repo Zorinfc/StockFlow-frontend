@@ -9,7 +9,12 @@
     </button>
   </div>
 
-  <table class="mt-4" matSort mat-table [dataSource]="dataSource">
+  <table
+    class="table table-hover table-striped mt-4"
+    matSort
+    mat-table
+    [dataSource]="dataSource"
+  >
     <ng-container matColumnDef="email">
       <th
         class="fw-bolder fs-5"
