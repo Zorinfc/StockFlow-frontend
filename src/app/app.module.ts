@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -8,6 +8,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
+  HTTP_INTERCEPTORS,
   HttpClientModule,
   provideHttpClient,
   withInterceptors,
@@ -28,6 +29,9 @@ import { urlInterceptor } from './core/interceptor/url.interceptor';
 import { APP_CONFIG } from './app.config';
 import { environment } from '../environments/environment.development';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { loadingInterceptor } from './core/interceptor/loading.interceptor';
+import { MatTooltip, MatTooltipModule } from '@angular/material/tooltip';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,6 +57,10 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
     MatPaginatorModule,
     DataTablesModule,
     ClipboardModule,
+    MatTooltipModule,
+    NgxSpinnerModule.forRoot({
+      type: 'ball-scale-multiple',
+    }),
   ],
   exports: [MatPaginatorModule, MatSortModule],
   providers: [
@@ -62,7 +70,10 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
     MatPaginator,
     MatSort,
     MatTableDataSource,
+    MatTooltip,
+    { provide: HTTP_INTERCEPTORS, useClass: loadingInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}

@@ -13,6 +13,7 @@ import { UpdateUserComponent } from './component/update-user/update-user.compone
 import { EditShelfComponent } from './component/edit-shelf/edit-shelf.component';
 import { CreateReportDialogComponent } from './component/create-report-dialog/create-report-dialog.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
     MatIconModule,
     ReactiveFormsModule,
     ClipboardModule,
+    MatTooltipModule,
   ],
 })
 export class SharedModule {}

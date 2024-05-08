@@ -7,10 +7,17 @@
       class="searchBox"
       (keyup)="filterChange($event)"
       type="text"
-      placeholder="Search ..."
+      placeholder="Search "
     />
     @if (role != 'rapor_kullanicisi') {
-    <button class="btn btn-success" (click)="addShelf()">NEW SHELF</button>
+    <button
+      matTooltip="New Shelf"
+      [matTooltipPosition]="'above'"
+      class="btn btn-success"
+      (click)="addShelf()"
+    >
+      NEW SHELF
+    </button>
     }
   </div>
   <table
@@ -98,6 +105,8 @@
           </span>
           } @else {
           <span
+            matTooltip="Edit Shelf"
+            [matTooltipPosition]="'above'"
             class="icon edit material-symbols-outlined"
             (click)="edit(shelf.no)"
           >
@@ -105,6 +114,8 @@
           </span>
           }
           <span
+            matTooltip="Delete Shelf"
+            [matTooltipPosition]="'above'"
             class="icon delete material-symbols-outlined"
             (click)="deleteShelf(shelf.no)"
             >delete</span

@@ -7,10 +7,17 @@
       class="searchBox"
       (keyup)="filterChange($event)"
       type="text"
-      placeholder="Search ..."
+      placeholder="Search"
     />
     @if (role != 'rapor_kullanicisi') {
-    <button class="btn btn-success" (click)="newItem()">NEW ITEM</button>
+    <button
+      matTooltip="New Item"
+      [matTooltipPosition]="'above'"
+      class="btn btn-success"
+      (click)="newItem()"
+    >
+      NEW ITEM
+    </button>
     }
   </div>
 
@@ -62,18 +69,24 @@
         @if(role != 'rapor_kullanicisi'){
         <div>
           <span
+            matTooltip="Item Add"
+            [matTooltipPosition]="'above'"
             class="icon plus material-symbols-outlined"
             (click)="itemAdd(item.name)"
           >
             add
           </span>
           <span
+            matTooltip="Item Remove"
+            [matTooltipPosition]="'above'"
             class="icon minus material-symbols-outlined"
             (click)="itemRemove(item.name)"
           >
             remove
           </span>
           <span
+            matTooltip="Item Delete"
+            [matTooltipPosition]="'above'"
             class="icon delete material-symbols-outlined"
             (click)="delete(item.name)"
             >delete</span
@@ -82,6 +95,8 @@
         }@else {
         <div>
           <span
+            matTooltip="Create Report"
+            [matTooltipPosition]="'above'"
             class="icon report material-symbols-outlined"
             (click)="createReport(item.name)"
           >

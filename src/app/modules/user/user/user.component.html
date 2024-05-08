@@ -7,9 +7,14 @@
       class="searchBox"
       (keyup)="filterChange($event)"
       type="text"
-      placeholder="Search ..."
+      placeholder="Search "
     />
-    <button class="btn btn-success" (click)="addEmployee()">
+    <button
+      matTooltip="New User"
+      [matTooltipPosition]="'above'"
+      class="btn btn-success"
+      (click)="addEmployee()"
+    >
       NEW EMPLOYEE
     </button>
   </div>
@@ -73,11 +78,15 @@
       <td mat-cell *matCellDef="let user">
         <div>
           <span
+            matTooltip="Update User"
+            [matTooltipPosition]="'above'"
             class="icon edit material-symbols-outlined me-3"
             (click)="updateEmployee(user.email)"
             >edit</span
           >
           <span
+            matTooltip="Delete User"
+            [matTooltipPosition]="'above'"
             class="icon delete material-symbols-outlined"
             (click)="delete(user.email)"
           >

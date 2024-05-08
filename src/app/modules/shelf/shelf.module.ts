@@ -6,6 +6,7 @@ import { ShelfComponent } from './shelf/shelf.component';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [ShelfComponent],
@@ -15,6 +16,7 @@ import { MatTableModule } from '@angular/material/table';
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
+    MatTooltipModule,
   ],
 })
 export class ShelfModule {}
