@@ -218,7 +218,7 @@ export class ItemComponent implements OnInit {
       exitAnimationDuration: '250ms',
       backdropClass: 'blurBackGround',
       data: {
-        userEmail: localStorage.getItem('email'),
+        userEmail: this.loginService.getEmail(),
         itemName: name,
       },
     });

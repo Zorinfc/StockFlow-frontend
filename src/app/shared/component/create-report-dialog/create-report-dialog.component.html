@@ -34,7 +34,11 @@
         />
       </div>
       <div class="d-grid">
-        <button class="btn btn-success mt-2" (click)="yes()">
+        <button
+          class="btn btn-success mt-2"
+          [disabled]="reportForm.invalid"
+          (click)="yes()"
+        >
           Create Report
         </button>
       </div>

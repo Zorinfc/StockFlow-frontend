@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -22,7 +22,10 @@ export class CreateReportDialogComponent {
   reportForm = this.builder.nonNullable.group({
     userEmail: [this.data.userEmail],
     itemName: [this.data.itemName],
-    description: [this.data.description],
+    description: [
+      this.data.description,
+      [Validators.required, Validators.pattern(/[\S]/)],
+    ],
   });
 
   yes() {

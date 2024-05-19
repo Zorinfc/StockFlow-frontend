@@ -30,7 +30,7 @@ export class MenuComponent implements OnInit {
   }
 
   getChar(): string {
-    let email = localStorage.getItem('email');
+    let email = this.loginService.getEmail();
     let str = email!.substring(0, 1);
 
     return str;

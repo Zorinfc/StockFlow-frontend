@@ -113,7 +113,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let email = localStorage.getItem('email');
+    let email = this.service.getEmail();
 
     this.userService.getUser(email!).subscribe({
       next: (data) => {

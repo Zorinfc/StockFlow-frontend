@@ -61,7 +61,11 @@ export class LoginService {
     let email = payload.email;
     localStorage.setItem('token', data);
     // localStorage.setItem('role', this.role);
-    localStorage.setItem('email', email);
+    //localStorage.setItem('email', email);
+  }
+  getEmail() {
+    let payload = this.parseJwt(localStorage.getItem('token')!);
+    return payload.email;
   }
 
   parseJwt(token: string) {
