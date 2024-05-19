@@ -77,10 +77,12 @@ export class ItemComponent implements OnInit {
 
     dialog.afterClosed().subscribe({
       next: (response) => {
-        if (response != undefined && response.name != '') {
-          this.itemCreate.name = response.name;
-          this.itemCreate.quantity = response.quantity;
-          this.itemCreate.min_quantity = response.min_quantity;
+        console.log(response.object.value.name);
+
+        if (response != undefined) {
+          this.itemCreate.name = response.object.value.name;
+          this.itemCreate.quantity = response.object.value.quantity;
+          this.itemCreate.min_quantity = response.object.value.min_quantity;
           console.log(this.itemCreate);
           this.itemService.addItem(this.itemCreate).subscribe({
             next: (response) => {

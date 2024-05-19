@@ -33,6 +33,7 @@ export class CreateReportDialogComponent {
       object: this.reportForm,
     });
   }
+
   no() {
     this.dialogRef.close({});
   }

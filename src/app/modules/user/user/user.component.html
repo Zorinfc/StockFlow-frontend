@@ -84,6 +84,16 @@
             (click)="updateEmployee(user.email)"
             >edit</span
           >
+          @if (user.email == userTest) {
+          <span
+            matTooltip="Delete User"
+            [matTooltipPosition]="'above'"
+            class="icon disable material-symbols-outlined"
+            (click)="delete(user.email)"
+          >
+            person_remove
+          </span>
+          }@else {
           <span
             matTooltip="Delete User"
             [matTooltipPosition]="'above'"
@@ -92,6 +102,7 @@
           >
             person_remove
           </span>
+          }
         </div>
       </td>
     </ng-container>

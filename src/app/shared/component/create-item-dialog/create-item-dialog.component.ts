@@ -19,9 +19,12 @@ export class CreateItemDialogComponent {
     quantity: [1, [Validators.required, Validators.pattern(/[\S]/)]],
   });
 
+  name: string = '';
+
   createItem() {
     this.dialogRef.close({
       object: this.itemForm,
     });
+    console.log('item dialog' + this.name);
   }
 }

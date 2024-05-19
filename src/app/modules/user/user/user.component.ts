@@ -11,6 +11,7 @@ import { UpdateUserComponent } from '../../../shared/component/update-user/updat
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { LoginService } from '../../../core/service/login/login.service';
 
 @Component({
   selector: 'app-user',
@@ -20,9 +21,10 @@ import { MatTableDataSource } from '@angular/material/table';
 export class UserComponent implements OnInit {
   users: User[] = [];
   dto: UserDTO = { name: '', lastName: '', email: '', password: '', roleId: 2 };
-
+  userTest: string = '';
   constructor(
     private userService: UserService,
+    private service: LoginService,
     private toastr: ToastrService,
     public dialog: MatDialog
   ) {}
@@ -45,6 +47,8 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
     this.refreshTable();
+
+    this.userTest = this.service.getEmail();
   }
 
   refreshTable() {
@@ -78,7 +82,6 @@ export class UserComponent implements OnInit {
     dialog.afterClosed().subscribe({
       next: (response) => {
         if (response != undefined) {
-          console.log(response.object);
           let password = this.passwordGenerator();
           this.dto.name = response.object.value.name;
           this.dto.lastName = response.object.value.lastName;
@@ -128,7 +131,7 @@ export class UserComponent implements OnInit {
           this.userService.deleteUser(email).subscribe({
             next: (response) => {
               this.refreshTable();
-              if (response == true) {
+              if (response != true) {
                 this.toastr.success('user deleted', 'User System', {
                   timeOut: 2000,
                 });
