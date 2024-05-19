@@ -25,6 +25,6 @@ export class ItemService {
     });
   }
   inOutItem(itemInOut: ItemInOut): Observable<any> {
-    return this.httpClient.post('/item/opt', itemInOut);
+    return this.httpClient.post('/item/inout', itemInOut);
   }
 }

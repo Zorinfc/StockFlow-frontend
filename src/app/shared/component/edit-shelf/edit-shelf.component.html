@@ -1,22 +1,29 @@
 <div class="dialog">
   <div class="mx-4 my-4">
-    <div class="mb-3">
-      <label class="form-label" for="quantity">
-        How many do you want to remove ?
-      </label>
-      <input
-        class="mt-2 form-control"
-        type="number"
-        name="quantity"
-        id="quantity"
-        max="5"
-        min="0"
-        [(ngModel)]="quantity"
-      />
-    </div>
+    <form [formGroup]="editForm">
+      <div class="mb-3">
+        <label class="form-label" for="quantity">
+          How many do you want to remove ?
+        </label>
+        <input
+          class="mt-2 form-control"
+          type="number"
+          name="quantity"
+          id="quantity"
+          min="1"
+          formControlName="quantity"
+        />
+      </div>
 
-    <div class="d-grid">
-      <button class="btn btn-danger" (click)="closeDialog()">Remove</button>
-    </div>
+      <div class="d-grid">
+        <button
+          class="btn btn-danger"
+          [disabled]="editForm.invalid"
+          (click)="closeDialog()"
+        >
+          Remove
+        </button>
+      </div>
+    </form>
   </div>
 </div>

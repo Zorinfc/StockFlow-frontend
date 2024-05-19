@@ -70,18 +70,19 @@ export class ShelfComponent implements OnInit {
     });
     dialog.afterClosed().subscribe({
       next: (response) => {
-        if (response != 0 && response != undefined) {
-          this.shelfService.editShelf(no, response).subscribe({
-            next: (resp) => {
-              if (resp.result != 0) {
-                console.log(resp);
-                this.toastr.info('Item Removed!', 'Shelf System', {
-                  timeOut: 2000,
-                });
-                this.refreshShelves();
-              }
-            },
-          });
+        if (response != undefined) {
+          this.shelfService
+            .editShelf(no, response.object.value.quantity)
+            .subscribe({
+              next: (resp) => {
+                if (resp.result != 0) {
+                  this.toastr.info('Item Removed!', 'Shelf System', {
+                    timeOut: 2000,
+                  });
+                  this.refreshShelves();
+                }
+              },
+            });
         }
       },
     });

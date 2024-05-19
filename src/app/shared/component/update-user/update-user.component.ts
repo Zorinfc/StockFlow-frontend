@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -21,10 +21,13 @@ export class UpdateUserComponent {
   ) {}
 
   userForm = this.formBuilder.nonNullable.group({
-    name: [this.data.name],
-    lastName: [this.data.lastName],
-    email: [this.data.email],
-    role: [this.data.roleId],
+    name: [this.data.name, [Validators.required, Validators.pattern(/[\S]/)]],
+    lastName: [
+      this.data.lastName,
+      [Validators.required, Validators.pattern(/[\S]/)],
+    ],
+    email: [this.data.email, [Validators.required, Validators.pattern(/[\S]/)]],
+    role: [this.data.roleId, [Validators.required, Validators.pattern(/[\S]/)]],
     boolean: [false],
   });
 

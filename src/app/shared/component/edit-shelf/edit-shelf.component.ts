@@ -1,5 +1,5 @@
-import { Dialog } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -8,9 +8,18 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrl: './edit-shelf.component.scss',
 })
 export class EditShelfComponent {
-  constructor(public dialogRef: MatDialogRef<EditShelfComponent>) {}
-  quantity: number = 0;
+  constructor(
+    public dialogRef: MatDialogRef<EditShelfComponent>,
+    private formBuilder: FormBuilder
+  ) {}
+
   closeDialog() {
-    this.dialogRef.close(this.quantity);
+    this.dialogRef.close({
+      object: this.editForm,
+    });
   }
+
+  editForm = this.formBuilder.nonNullable.group({
+    quantity: [1, [Validators.required, Validators.pattern(/[\S]/)]],
+  });
 }

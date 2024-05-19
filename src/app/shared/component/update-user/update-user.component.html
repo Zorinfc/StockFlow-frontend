@@ -61,7 +61,11 @@
         </label>
       </div>
       <div class="d-grid">
-        <button class="btn btn-info mt-2" (click)="updateUser()">
+        <button
+          class="btn btn-info mt-2"
+          [disabled]="userForm.invalid"
+          (click)="updateUser()"
+        >
           Update Employee
         </button>
       </div>

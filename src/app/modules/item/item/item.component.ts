@@ -145,11 +145,11 @@ export class ItemComponent implements OnInit {
     dialog.componentInstance.buttonName = 'Add Item';
     dialog.afterClosed().subscribe({
       next: (response) => {
-        if (response != undefined && response != 0) {
+        if (response != undefined) {
           this.itemInOut.name = name;
           this.itemInOut.operator = true;
-          this.itemInOut.count = response;
-          console.log(response);
+          this.itemInOut.count = response.object.value.quantity;
+
           this.itemService.inOutItem(this.itemInOut).subscribe({
             next: (response) => {
               this.refreshItems();
@@ -184,11 +184,10 @@ export class ItemComponent implements OnInit {
     dialog.componentInstance.buttonName = 'Remove Item';
     dialog.afterClosed().subscribe({
       next: (response) => {
-        if (response != undefined && response != 0) {
+        if (response != undefined) {
           this.itemInOut.name = name;
-          this.itemInOut.operator = false;
-          this.itemInOut.count = response;
-          // console.log('itemComponent - itemAdd() ==> ' + this.itemInOut.operator);
+          this.itemInOut.operator = true;
+          this.itemInOut.count = response.object.value.quantity;
           this.itemService.inOutItem(this.itemInOut).subscribe({
             next: () => {
               this.refreshItems();
